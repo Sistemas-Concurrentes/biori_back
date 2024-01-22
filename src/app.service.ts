@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import {DbConnection} from "./db/db.connection";
+import { Injectable } from "@nestjs/common";
+import { DbConnection } from "./db/db.connection";
 
 @Injectable()
 export class AppService {
@@ -20,5 +20,6 @@ export class AppService {
       if (conn) conn.end();
     }
   }
-
 }
+
+// const service = new AppService(new MyDb());
