@@ -5,8 +5,9 @@ dotenv.config();
 
 @Injectable()
 export class DbConnection {
-  async createConnection(): Promise<db.Connection> {
-    const conn = await db.createConnection({
+  async createConnection(): Promise<db.Pool> {
+    const conn =  db.createPool({
+      connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT),
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
