@@ -12,7 +12,6 @@ export class AppService {
     let conn;
     try {
       conn = await this.dbConnection.createConnection();
-      // console.log(rows);
       return await conn.query('SELECT * FROM users');
     } catch (err) {
       throw err;
@@ -21,5 +20,3 @@ export class AppService {
     }
   }
 }
-
-// const service = new AppService(new MyDb());
