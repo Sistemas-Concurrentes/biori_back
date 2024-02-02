@@ -17,4 +17,18 @@ export class DbConnection {
 
     return conn;
   }
+
+
+  async runQuery(query: string, params?: any[]): Promise<any> {
+    let conn;
+    try {
+      conn = await this.createConnection();
+      return await conn.query(query, params);
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) conn.end();
+    }
+  }
+
 }
