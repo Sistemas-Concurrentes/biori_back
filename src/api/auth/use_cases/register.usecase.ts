@@ -4,6 +4,7 @@ import { UsertableModel } from '../../../datasource/db/usertable/model/usertable
 import { RegisterDto } from '../controller/dto/register.dto';
 import { RegisterUsecaseResult } from './dto/registerUsecase.result';
 import { MyJwtService } from '../../../utiles/jwt/jwt.service';
+import { encodePassword} from '../../../utiles/bcrypt/mybcrypt';
 
 
 @Injectable()
@@ -18,6 +19,7 @@ export class RegisterUsecase {
       throw new UnauthorizedException('User already exists')
     }
 
+    registerDto.password = encodePassword(registerDto.password);
     await this.userTable.createUser(registerDto);
 
     return {

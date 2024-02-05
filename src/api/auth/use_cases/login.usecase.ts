@@ -3,25 +3,20 @@ import { UserTable } from '../../../datasource/db/usertable/usertable.usecase';
 import { MyJwtService } from '../../../utiles/jwt/jwt.service';
 import { UsertableModel } from '../../../datasource/db/usertable/model/usertable.model';
 import { LoginUsecaseResult } from './dto/loginUsecase.result';
-
-//import * as bcrypt from 'bcrypt';
+import { comparePassword} from '../../../utiles/bcrypt/mybcrypt';
 
 @Injectable()
 export class LoginUsecase {
 
-  //const saltRounds: number = 10;
-
   constructor(private userTable: UserTable,
               private myJwt: MyJwtService) {}
 
-  private isNotValidatedUser(passwordUser: string, passwordRequested:string): boolean {
-    //const isMatch = await bcrypt.compare(pass, user.password);
-    return passwordUser != passwordRequested;
-
+  private isNotValidatedUser(hashPassword: string, passwordRequested:string): boolean {
+    return !comparePassword(passwordRequested, hashPassword)
   }
 
   async run(user_name: string, pass: string): Promise<LoginUsecaseResult> {
-    const user:UsertableModel  = await this.  userTable.getUserByEmail(user_name);
+    const user:UsertableModel  = await this.userTable.getUserByEmail(user_name);
 
     if (this. isNotValidatedUser(user.password, pass)){
       throw new UnauthorizedException('Invalid credentials')
