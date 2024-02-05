@@ -3,7 +3,7 @@ import { RegisterUsecase } from '../use_cases/register.usecase';
 import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
-export class AuthLoginEntrypoint {
+export class AuthRegisterEntrypoint {
   constructor (private registerUsecase: RegisterUsecase) {}
 
   @HttpCode(HttpStatus.OK)

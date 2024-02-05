@@ -23,7 +23,7 @@ export class LoginUsecase {
   async run(user_name: string, pass: string): Promise<LoginUsecaseResult> {
     const user:UsertableModel  = await this.  userTable.getUserByEmail(user_name);
 
-    if (this.isNotValidatedUser(user.password, pass)){
+    if (this. isNotValidatedUser(user.password, pass)){
       throw new UnauthorizedException('Invalid credentials')
     }
 
