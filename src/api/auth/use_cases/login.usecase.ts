@@ -11,14 +11,17 @@ export class LoginUsecase {
   constructor(private userTable: UserTable,
               private myJwt: MyJwtService) {}
 
-  private isNotValidatedUser(hashPassword: string, passwordRequested:string): boolean {
-    return !comparePassword(passwordRequested, hashPassword)
+  private isValidatedUser(hashPassword: string, passwordRequested:string): boolean {
+    if (!hashPassword)
+      return false;
+
+    return comparePassword(passwordRequested, hashPassword)
   }
 
   async run(user_name: string, pass: string): Promise<LoginUsecaseResult> {
     const user:UsertableModel  = await this.userTable.getUserByEmail(user_name);
 
-    if (this. isNotValidatedUser(user.password, pass)){
+    if (!this.isValidatedUser(user.password, pass)){
       throw new UnauthorizedException('Invalid credentials')
     }
 
