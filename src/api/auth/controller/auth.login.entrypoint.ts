@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { SingInDto } from '../dto/sing_in.dto';
+import { SingInDto } from './dto/sing_in.dto';
 import { LoginUsecase } from '../use_cases/login.usecase';
 
 @Controller('auth')
