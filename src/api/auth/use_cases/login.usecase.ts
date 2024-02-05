@@ -1,6 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { User, UserTable } from '../../../datasource/db/usertable/usertable.usecase';
+import { UserTable } from '../../../datasource/db/usertable/usertable.usecase';
 import { MyJwtService } from '../../../utiles/jwt/jwt.service';
+import { UsertableModel } from '../../../datasource/db/usertable/model/usertable.model';
+import { LoginUsecaseResult } from './dto/loginUsecase.result';
+
 //import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -17,17 +20,17 @@ export class LoginUsecase {
 
   }
 
-  async run(user_name: string, pass: string): Promise<{ access_token: string }> {
-    const user:User  = await this.userTable.getUserByEmail(user_name);
+  async run(user_name: string, pass: string): Promise<LoginUsecaseResult> {
+    const user:UsertableModel  = await this.  userTable.getUserByEmail(user_name);
 
-    if (user && this.isNotValidatedUser(user.password, pass)){
+    if (this.isNotValidatedUser(user.password, pass)){
       throw new UnauthorizedException('Invalid credentials')
     }
 
     return {
-      access_token: this.myJwt.getAccessToken(user.user_name),
-    };
-
-
+        id: user.id,
+        user_name: user.user_name,
+        token: this.myJwt.getAccessToken(user.user_name)
+      };
   }
 }
