@@ -20,6 +20,9 @@ export class UsertableModel {
   @IsNotEmpty()
   password: string;
 
+  @IsNotEmpty()
+  phone_number: string;
+
   @IsDate()
   createdAt: Date;
 
