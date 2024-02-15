@@ -10,5 +10,9 @@ export class MyJwtService {
     return this.jwtService.sign(payload);
   }
 
+  getUserName(token: string): string {
+    const payload = this.jwtService.decode(token);
+    return payload['data'];
+  }
 
 }
