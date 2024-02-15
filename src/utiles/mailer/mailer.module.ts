@@ -32,5 +32,6 @@ import { MailerEntrypoint } from './mailer.entrypoint';
     }),
   ],
   providers: [MyMailerService],
+  exports: [MyMailerService],
 })
 export class MyMailerModule {}

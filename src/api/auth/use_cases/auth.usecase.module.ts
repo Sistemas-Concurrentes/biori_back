@@ -8,7 +8,7 @@ import { MyMailerModule } from '../../../utiles/mailer/mailer.module';
 
 
 @Module({
-  imports: [ UsertableModule, MyJwtModule],
+  imports: [ UsertableModule, MyJwtModule, MyMailerModule],
   controllers: [],
   providers: [LoginUsecase, RegisterUsecase, ValidationUsecase],
   exports: [LoginUsecase, RegisterUsecase, ValidationUsecase],
