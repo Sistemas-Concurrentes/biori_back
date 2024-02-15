@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsEmail, IsNotEmpty } from 'class-validator';
+import {  IsDateString, IsEmail, IsNotEmpty } from 'class-validator';
 
 export class RegisterDto  {
 
