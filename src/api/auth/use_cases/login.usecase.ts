@@ -28,7 +28,8 @@ export class LoginUsecase {
     return {
         id: user.id,
         user_name: user.user_name,
-        token: this.myJwt.getAccessToken(user.user_name)
+        token: this.myJwt.getAccessToken(user.user_name),
+        register_code: user.register_code
       };
   }
 }

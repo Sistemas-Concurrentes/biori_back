@@ -23,6 +23,9 @@ export class UsertableModel {
   @IsNotEmpty()
   phone_number: string;
 
+  @IsNotEmpty()
+  register_code: number;
+
   @IsDate()
   createdAt: Date;
 
