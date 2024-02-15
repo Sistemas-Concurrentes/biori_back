@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserTable } from '../../../datasource/db/usertable/usertable.usecase';
 import { UsertableModel } from '../../../datasource/db/usertable/model/usertable.model';
 import { RegisterDto } from '../controller/dto/register.dto';
@@ -20,7 +20,12 @@ export class RegisterUsecase {
     }
 
     registerDto.password = encodePassword(registerDto.password);
-    await this.userTable.createUser(registerDto);
+
+    try {
+      await this.userTable.createUser(registerDto);
+    } catch (error) {
+      throw new ConflictException('Error creating user, try again later.')
+    }
 
     return {
       user_name: registerDto.user_name,
