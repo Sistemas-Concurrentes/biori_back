@@ -10,6 +10,15 @@ export class MyJwtService {
     return this.jwtService.sign(payload);
   }
 
+  verifyToken(token: string): boolean {
+    try {
+      this.jwtService.verify(token);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   getUserName(token: string): string {
     const payload = this.jwtService.decode(token);
     return payload['data'];
