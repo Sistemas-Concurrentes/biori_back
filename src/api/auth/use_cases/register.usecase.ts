@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { UserTable } from '../../../datasource/db/usertable/usertable.usecase';
 import { UsertableModel } from '../../../datasource/db/usertable/model/usertable.model';
 import { RegisterDto } from '../controller/dto/register.dto';
@@ -18,7 +18,7 @@ export class RegisterUsecase {
   async run(registerDto:RegisterDto): Promise<RegisterUsecaseResult> {
     const user:UsertableModel  = await this.userTable.getUserByEmail(registerDto.user_name);
     if (user.user_name){
-      throw new UnauthorizedException('User already exists')
+      throw new ConflictException('User already exists')
     }
 
     registerDto.password = encodePassword(registerDto.password);
@@ -29,7 +29,7 @@ export class RegisterUsecase {
       this.myMailer.sendVerificationCode(user.user_name, user.register_code.toString())
 
     } catch (error) {
-      throw new ConflictException('Error creating user, try again later.')
+      throw new ServiceUnavailableException('Error creating user, try again later.')
     }
 
     return {
