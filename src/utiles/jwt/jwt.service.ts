@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { JwtModel, jwtModelFromJson } from './model/jwt.model';
 
 @Injectable()
 export class MyJwtService {
 
   constructor(private jwtService: JwtService) {}
-  getAccessToken(datos: string ): string {
-    const payload = { data: datos };
+  getAccessToken(username: string, name: string): string {
+    const jwtModel = new JwtModel(username, name);
+    const payload = jwtModel.toJson();
     return this.jwtService.sign(payload);
   }
 
@@ -19,9 +21,12 @@ export class MyJwtService {
     }
   }
 
+  getJwtModel(token: string): JwtModel {
+    return jwtModelFromJson(this.jwtService.decode(token));
+  }
+
   getUserName(token: string): string {
-    const payload = this.jwtService.decode(token);
-    return payload['data'];
+    return this.getJwtModel(token).username;
   }
 
 }

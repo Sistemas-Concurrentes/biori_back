@@ -34,7 +34,7 @@ export class RegisterUsecase {
 
     return {
       user_name: registerDto.user_name,
-      token: this.myJwt.getAccessToken(registerDto.user_name)
+      token: this.myJwt.getAccessToken(registerDto.user_name, registerDto.name),
     }
   }
 }
