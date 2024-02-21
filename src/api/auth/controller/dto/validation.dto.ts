@@ -6,9 +6,5 @@ export class ValidationDto  {
   @IsNumberString()
   register_code: number;
 
-  @IsNotEmpty()
-  token: string;
-
-
 }
 
