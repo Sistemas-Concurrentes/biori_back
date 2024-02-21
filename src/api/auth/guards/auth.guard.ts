@@ -18,12 +18,15 @@ export class AuthGuard implements CanActivate {
     if (!token || !this.jwtService.verifyToken(token)) {
       throw new UnauthorizedException();
     }
+
+    request['user'] = this.jwtService.getUserName(token);
+
     return true;
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [authorization,type, token] = request.headers.authorization?.split(' ') ?? [];
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
 }
