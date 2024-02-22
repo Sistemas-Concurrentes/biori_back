@@ -19,7 +19,7 @@ export class ValidationUsecase {
       throw new UnauthorizedException('Invalid credentials')
     }
 
-    // await this.userTable.updateUserRegisterCode(user_name);
+    await this.userTable.updateUserRegisterCode(user.user_name);
 
     return {
       token: this.myJwt.getAccessToken(user.user_name, user.name),
