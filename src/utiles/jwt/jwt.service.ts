@@ -29,4 +29,7 @@ export class MyJwtService {
     return this.getJwtModel(token).username;
   }
 
+  getUserId(token: string): number {
+    return this.getJwtModel(token).id;
+  }
 }
