@@ -4,10 +4,9 @@ dotenv.config();
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MyMailerService } from './mailer.service';
-import { MailerEntrypoint } from './mailer.entrypoint';
 
 @Module({
-  controllers: [MailerEntrypoint],
+  controllers: [],
   imports: [
     MailerModule.forRoot({
       transport: {
