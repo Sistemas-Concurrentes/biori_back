@@ -21,5 +21,4 @@ interface Report{
 export interface ConsultResult{
   advertisements: Array<Advertisement>,
   reports: Array<Report>,
-  user_name: string;
 }
