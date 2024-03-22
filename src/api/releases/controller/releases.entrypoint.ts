@@ -2,7 +2,7 @@ import { Controller, HttpCode, HttpStatus, UseGuards, Request, Get } from '@nest
 import { AuthGuard } from '../../auth/guards/auth.guard';
 
 @Controller('releases')
-export class AuthLoginEntrypoint {
+export class ReleasesEntrypoint {
   constructor () {}
 
   @UseGuards(AuthGuard)
