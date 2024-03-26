@@ -10,9 +10,10 @@ export class Advertisementtable {
 
   async getAll(): Promise<Array<AdvertisementModel>> {
     const query = 'SELECT * FROM advertisement';
-    await this.dbConnection.runQuery(query);
+    const advertisements = await this.dbConnection.runQuery(query);
 
-    return null;
+    return advertisements.map((advertisement) => new AdvertisementModel(advertisement));
+
   }
 
 }

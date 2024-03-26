@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
 
 export class AdvertisementModel {
   @IsNotEmpty()
@@ -19,12 +19,17 @@ export class AdvertisementModel {
   @IsDate()
   updatedAt: Date;
 
-  @IsDate()
+  @IsBoolean()
   deletedAt: Date;
 
 
-  constructor(partial: Partial<AdvertisementModel>) {
-    Object.assign(this, partial);
+  constructor(json: any) {
+    this.id = json.id;
+    this.title = json.title;
+    this.description = json.description;
+    this.userId = json.user_id;
+    this.createdAt = json.created;
+    this.updatedAt = json.last_update;
+    this.deletedAt = json.is_deleted;
   };
-
 }
