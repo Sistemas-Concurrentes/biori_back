@@ -8,4 +8,4 @@ import { ReportTable } from './reporttable.usecase';
   providers: [ReportTable],
   exports: [ReportTable],
 })
-export class ReporttableModule {}
+export class ReportModule {}
