@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { AdvertisementtableModule } from '../../../datasource/db/advertisementtable/advertisementtable.module';
+import { ConsultUsecase } from './consult.usecase';
 
 @Module({
-  imports: [],
+  imports: [ AdvertisementtableModule ],
   controllers: [],
-  providers: [],
-  exports: [],
+  providers: [ ConsultUsecase],
+  exports: [ ConsultUsecase ],
 })
 export class ReleasesUsecaseModule {}
