@@ -20,7 +20,7 @@ export class AdvertisementModel {
   updatedAt: Date;
 
   @IsBoolean()
-  deletedAt: Date;
+  isDeleted: boolean;
 
 
   constructor(json: any) {
@@ -30,6 +30,6 @@ export class AdvertisementModel {
     this.userId = json.user_id;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
-    this.deletedAt = json.is_deleted;
+    this.isDeleted = json.is_deleted;
   };
 }
