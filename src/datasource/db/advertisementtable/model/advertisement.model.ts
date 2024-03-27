@@ -13,6 +13,9 @@ export class AdvertisementModel {
   @IsNotEmpty()
   userId: number;
 
+  @IsNotEmpty()
+  userName: string;
+
   @IsDate()
   createdAt: Date;
 
@@ -28,6 +31,7 @@ export class AdvertisementModel {
     this.title = json.title;
     this.description = json.description;
     this.userId = json.user_id;
+    this.userName = json.name + ' ' + json.surname;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;

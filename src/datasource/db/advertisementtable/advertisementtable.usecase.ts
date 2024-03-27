@@ -9,7 +9,8 @@ export class Advertisementtable {
   }
 
   async getAll(): Promise<Array<AdvertisementModel>> {
-    const query = 'SELECT * FROM advertisement';
+    const query = 'select a.*, u.name, u.surname  from advertisement a ' +
+      'INNER JOIN user u on a.user_id = u.id';
     const advertisements = await this.dbConnection.runQuery(query);
 
     return advertisements.map((advertisement) => new AdvertisementModel(advertisement));

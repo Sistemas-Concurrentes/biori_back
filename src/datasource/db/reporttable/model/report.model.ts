@@ -5,7 +5,10 @@ export class ReportModel {
   id: number;
 
   @IsNotEmpty()
-  publisherId: number;
+  teacherId: number;
+
+  @IsNotEmpty()
+  teacherName: string;
 
   @IsNotEmpty()
   title: string;
@@ -27,7 +30,8 @@ export class ReportModel {
     this.id = json.id;
     this.title = json.title;
     this.description = json.description;
-    this.publisherId = json.publisher;
+    this.teacherId = json.publisher;
+    this.teacherName = json.name + ' ' + json.surname;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;
