@@ -16,6 +16,7 @@ export class AdvertisementModel {
   @IsNotEmpty()
   userName: string;
 
+  groups:[number,string][];
   @IsDate()
   createdAt: Date;
 
@@ -26,7 +27,7 @@ export class AdvertisementModel {
   isDeleted: boolean;
 
 
-  constructor(json: any) {
+  constructor(json: any, groupAdvs:[number,string][]) {
     this.id = json.id;
     this.title = json.title;
     this.description = json.description;
@@ -35,5 +36,6 @@ export class AdvertisementModel {
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;
+    this.groups = groupAdvs;
   };
 }
