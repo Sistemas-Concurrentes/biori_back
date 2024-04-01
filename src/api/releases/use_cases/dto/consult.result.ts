@@ -1,21 +1,22 @@
+import { Group } from '../../../../datasource/db/advertisementtable/model/groupadvertisement.model';
 
 interface Advertisement{
   id: number;
   title: string;
   description: string;
-  name_creator: string;
-  user_id: number;
-  last_update: string;
-  groups_id: Array<number>;
+  userName: string;
+  userId: number;
+  updatedAt: Date;
+  groups: Group[];
 }
 
 interface Report{
   id: number;
   title: string;
   description: string;
-  name_creator: string;
-  user_id: number;
-  last_update: string;
+  teacherName: string;
+  teacherId: number;
+  updatedAt: Date;
 }
 
 export interface ConsultResult{
