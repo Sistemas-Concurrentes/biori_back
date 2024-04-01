@@ -10,8 +10,7 @@ export class ReleasesEntrypoint {
   @HttpCode(HttpStatus.OK)
   @Get('getAll')
   async getAll (){
-    this.consultUseCase.run();
-    return null;
+    return this.consultUseCase.run();
   }
 
 }
