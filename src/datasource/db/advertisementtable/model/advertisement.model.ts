@@ -1,4 +1,5 @@
 import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
+import { Group } from './groupadvertisement.model';
 
 export class AdvertisementModel {
   @IsNotEmpty()
@@ -16,7 +17,7 @@ export class AdvertisementModel {
   @IsNotEmpty()
   userName: string;
 
-  groups:[number,string][];
+  groups:Group[];
   @IsDate()
   createdAt: Date;
 
@@ -27,7 +28,7 @@ export class AdvertisementModel {
   isDeleted: boolean;
 
 
-  constructor(json: any, groupAdvs:[number,string][]) {
+  constructor(json: any, groupAdvs:Group[]) {
     this.id = json.id;
     this.title = json.title;
     this.description = json.description;

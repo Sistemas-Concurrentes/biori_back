@@ -1,20 +1,24 @@
 import { IsNotEmpty } from 'class-validator';
 import { GroupadvertisementDto } from '../dto/groupadvertisement.dto';
 
+export class Group {
+  constructor(public id: number, public name: string) {}
+}
+
 export class GroupAdvertisementModel {
   @IsNotEmpty()
-  groupAdvertisements: Map<number, Array<[number,string]>>;
+  groupAdvertisements: Map<number, Array<Group>>;
 
   constructor(groupAdvDto: Array<GroupadvertisementDto>) {
-    this.groupAdvertisements = new Map<number, Array<[number,string]>>();
+    this.groupAdvertisements = new Map<number, Array<Group>>();
 
     groupAdvDto.forEach((groupAdvDto) => {
-      const actualTuple:[number, string] = [groupAdvDto.groupId, groupAdvDto.groupName];
+      const newGroup = new Group(groupAdvDto.groupId, groupAdvDto.groupName);
       if (!this.groupAdvertisements.has(groupAdvDto.advertisementId)) {
-        this.groupAdvertisements.set(groupAdvDto.advertisementId, [actualTuple]);
+        this.groupAdvertisements.set(groupAdvDto.advertisementId,[newGroup]);
       }
       else {
-        this.groupAdvertisements.get(groupAdvDto.advertisementId).push(actualTuple);
+        this.groupAdvertisements.get(groupAdvDto.advertisementId).push(newGroup);
       }
     });
 
