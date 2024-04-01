@@ -13,12 +13,32 @@ export class ConsultUsecase {
               private reportTable: ReportTable) {}
 
   async run(): Promise<ConsultResult> {
-    const advertisements: Array<AdvertisementModel> = await this.advertisementTable.getAll();
-    // recoger los grupos de advertisement
+    const allAdvertisements: Array<AdvertisementModel> = await this.advertisementTable.getAll();
+    const allReports: Array<ReportModel> = await this.reportTable.getAll();
 
-    const reports: Array<ReportModel> = await this.reportTable.getAll();
-    // crear ConsultResult
-    return null;
+    return {
+      advertisements: allAdvertisements.map((advertisement) => {
+        return {
+          id: advertisement.id,
+          title: advertisement.title,
+          description: advertisement.description,
+          groups: advertisement.groups,
+          userName: advertisement.userName,
+          userId: advertisement.userId,
+          updatedAt: advertisement.updatedAt
+        }
+      }),
+      reports: allReports.map((report) => {
+        return {
+          id: report.id,
+          title: report.title,
+          description: report.description,
+          teacherName: report.teacherName,
+          teacherId: report.teacherId,
+          updatedAt: report.updatedAt
+        }
+      })
+    };
 
   }
 }
