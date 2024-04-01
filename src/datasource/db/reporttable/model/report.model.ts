@@ -14,7 +14,7 @@ export class ReportModel {
   title: string;
 
   @IsNotEmpty()
-  description: number;
+  description: string;
 
   @IsDate()
   createdAt: Date;
