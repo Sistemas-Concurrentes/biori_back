@@ -8,7 +8,7 @@ export class EventTable {
   constructor(private dbConnection: DbConnection) {
   }
 
-  async getAll(): Promise<Array<EventModel>> {
+  async getAll(): Promise<EventModel[]> {
 
     const query = 'SELECT e.*, r.date_end_inscription, COALESCE(l.likes_count, 0) as likes_count, u.name as organiser_name, u.surname as organiser_surname ' +
       'FROM event e ' +

@@ -34,7 +34,7 @@ interface Event{
 }
 
 export interface ConsultResult{
-  advertisements: Array<Advertisement>,
-  reports: Array<Report>,
+  advertisements: Advertisement[],
+  reports: Report[],
   events: Event[]
 }

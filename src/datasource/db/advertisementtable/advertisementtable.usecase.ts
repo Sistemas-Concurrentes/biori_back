@@ -11,7 +11,7 @@ export class Advertisementtable {
               private groupAdvertisement: GroupAdvertisementTable) {
   }
 
-  async getAll(): Promise<Array<AdvertisementModel>> {
+  async getAll(): Promise<AdvertisementModel[]> {
     const groupAdvs:GroupAdvertisementModel = await this.groupAdvertisement.getAll();
 
     const query = 'select a.*, u.name, u.surname  from advertisement a ' +

@@ -7,10 +7,10 @@ export class Group {
 
 export class GroupAdvertisementModel {
   @IsNotEmpty()
-  groupAdvertisements: Map<number, Array<Group>>;
+  groupAdvertisements: Map<number, Group[]>;
 
-  constructor(groupAdvDto: Array<GroupadvertisementDto>) {
-    this.groupAdvertisements = new Map<number, Array<Group>>();
+  constructor(groupAdvDto: GroupadvertisementDto[]) {
+    this.groupAdvertisements = new Map<number, Group[]>();
 
     groupAdvDto.forEach((groupAdvDto) => {
       const newGroup = new Group(groupAdvDto.groupId, groupAdvDto.groupName);

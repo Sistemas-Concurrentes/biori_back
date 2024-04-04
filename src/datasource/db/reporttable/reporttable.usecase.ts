@@ -8,7 +8,7 @@ export class ReportTable {
   constructor(private dbConnection: DbConnection) {
   }
 
-  async getAll(): Promise<Array<ReportModel>> {
+  async getAll(): Promise<ReportModel[]> {
     const query = 'SELECT r.*, t.name, t.surname\n' +
       'FROM reports r\n' +
       'INNER JOIN (\n' +
