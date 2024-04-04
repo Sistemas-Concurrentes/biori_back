@@ -49,7 +49,7 @@ export class EventModel {
     this.organiserName = json.organiser_name + ' ' + json.organiser_surname;
     this.dateFrom = json.dateFrom;
     this.location = json.location;
-    this.likes = json.likes_count;
+    this.likes = Number(json.likes_count);
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;
