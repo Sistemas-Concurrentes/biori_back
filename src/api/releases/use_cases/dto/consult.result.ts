@@ -19,6 +19,20 @@ interface Report{
   updatedAt: Date;
 }
 
+interface Event{
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  organiser: number;
+  organiserName: string;
+  dateFrom: Date;
+  location: string;
+  likes: number;
+  dateEndInscription: Date;
+  updatedAt: Date;
+}
+
 export interface ConsultResult{
   advertisements: Array<Advertisement>,
   reports: Array<Report>,
