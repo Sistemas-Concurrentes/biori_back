@@ -18,7 +18,7 @@ export class EventDatesDto {
 
   constructor(json: any) {
     this.event_id = json.event_id;
-    this.date_event = json.date_event;
+    this.date_event = json.dates_event;
 
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
