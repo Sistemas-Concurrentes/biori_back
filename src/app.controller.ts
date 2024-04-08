@@ -10,8 +10,4 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('/users')
-  async getUsers(): Promise<string> {
-    return await this.appService.getUsers();
-  }
 }
