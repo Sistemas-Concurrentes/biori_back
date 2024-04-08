@@ -20,7 +20,7 @@ export class EventModel {
   organiserName: string;
 
   @IsNotEmpty()
-  dateFrom: Date;
+  dates: Date[];
 
   @IsNotEmpty()
   location: string;
@@ -40,14 +40,14 @@ export class EventModel {
   dateEndInscription: Date ;
 
 
-  constructor(json: any) {
+  constructor(json: any, dates: Date[]) {
     this.id = json.id;
     this.title = json.title;
     this.category = json.category;
     this.description = json.description;
     this.organiser = json.organiser;
     this.organiserName = json.organiser_name + ' ' + json.organiser_surname;
-    this.dateFrom = json.dateFrom;
+    this.dates = dates;
     this.location = json.location;
     this.likes = Number(json.likes_count);
     this.createdAt = json.created;

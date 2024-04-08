@@ -26,7 +26,7 @@ interface Event{
   description: string;
   organiser: number;
   organiserName: string;
-  dateFrom: Date;
+  dates: Date[];
   location: string;
   likes: number;
   dateEndInscription: Date;

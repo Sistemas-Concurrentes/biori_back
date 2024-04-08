@@ -47,7 +47,7 @@ export class ConsultUsecase {
           description: event.description,
           organiser: event.organiser,
           organiserName: event.organiserName,
-          dateFrom: event.dateFrom,
+          dates: event.dates,
           location: event.location,
           likes: event.likes,
           dateEndInscription: event.dateEndInscription,
