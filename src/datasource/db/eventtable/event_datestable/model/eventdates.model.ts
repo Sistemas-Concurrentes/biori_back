@@ -8,6 +8,7 @@ export class EventDatesModel {
 
 
   constructor(eventDatesDto: EventDatesDto[]) {
+    this.eventDates = [];
     eventDatesDto.forEach((eventDatesDto) => {
       this.eventDates.push(eventDatesDto.date_event);
     });
