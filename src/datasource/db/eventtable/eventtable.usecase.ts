@@ -27,8 +27,8 @@ export class EventTable {
       'FROM event e ' +
       'LEFT JOIN event_with_register r on e.id = r.id_event ' +
       'LEFT JOIN (' +
-        'SELECT event_id, COUNT(DISTINCT student_id) as likes_count ' +
-        'FROM likes_student_event ' +
+      'SELECT event_id, COUNT(DISTINCT user_id) as likes_count ' +
+      'FROM likes_user_event ' +
         'WHERE is_followed=true ' +
         'GROUP BY event_id' +
       ') l on e.id = l.event_id ' +
