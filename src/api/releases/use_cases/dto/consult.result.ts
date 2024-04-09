@@ -1,4 +1,5 @@
 import { Group } from '../../../../datasource/db/advertisementtable/model/groupadvertisement.model';
+import { TagModel } from '../../../../datasource/db/tagtable/model/tag.model';
 
 interface Advertisement{
   id: number;
@@ -29,6 +30,7 @@ interface Event{
   dates: Date[];
   location: string;
   likes: number;
+  tags: TagModel[];
   dateEndInscription: Date;
   updatedAt: Date;
 }

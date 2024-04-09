@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { DbConnection } from '../db.connection';
 import { EventModel } from './model/event.model';
 import { EventDatesTable } from './event_datestable/event_datestable.usecase';
+import { EventTagTable } from './event_tagtable/event_tagtable.usecase';
 
 
 @Injectable()
 export class EventTable {
   constructor(private dbConnection: DbConnection,
-              private eventDatesTable: EventDatesTable) {
+              private eventDatesTable: EventDatesTable,
+              private eventTagTable: EventTagTable) {
   }
 
   async getAll(): Promise<EventModel[]> {
@@ -29,10 +31,7 @@ export class EventTable {
     const tags = await this.eventTagTable.getAll();
 
    return events.map((event: any) => {
-      return new EventModel(event, dates.eventDates.get(event.id));
+      return new EventModel(event, dates.eventDates.get(event.id), tags.tagModels.get(event.id));
     });
-
-    return await Promise.all(eventPromises);
   }
-
 }

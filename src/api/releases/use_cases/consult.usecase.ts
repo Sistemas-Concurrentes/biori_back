@@ -50,6 +50,7 @@ export class ConsultUsecase {
           dates: event.dates,
           location: event.location,
           likes: event.likes,
+          tags: event.tags,
           dateEndInscription: event.dateEndInscription,
           updatedAt: event.updatedAt
         }
