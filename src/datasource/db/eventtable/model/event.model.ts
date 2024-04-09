@@ -1,4 +1,5 @@
 import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
+import { TagModel } from '../../tagtable/model/tag.model';
 
 export class EventModel {
   @IsNotEmpty()
@@ -22,6 +23,9 @@ export class EventModel {
   @IsNotEmpty()
   dates: Date[];
 
+  //@IsNotEmpty() hasta que no tenga los tags no puedo asegurar que tienen
+  tags: TagModel[];
+
   @IsNotEmpty()
   location: string;
 
@@ -40,7 +44,7 @@ export class EventModel {
   dateEndInscription: Date ;
 
 
-  constructor(json: any, dates: Date[]) {
+  constructor(json: any, dates: Date[], tags: TagModel[] = []) {
     this.id = json.id;
     this.title = json.title;
     this.category = json.category;
@@ -48,6 +52,7 @@ export class EventModel {
     this.organiser = json.organiser;
     this.organiserName = json.organiser_name + ' ' + json.organiser_surname;
     this.dates = dates;
+    this.tags = tags;
     this.location = json.location;
     this.likes = Number(json.likes_count);
     this.createdAt = json.created;
