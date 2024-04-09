@@ -26,7 +26,7 @@ export class EventTable {
     const events = await this.dbConnection.runQuery(query);
 
     const eventPromises = events.map(async (event: any) => {
-      const eventDatesModel = await this.eventDatesTable.getDatesFromEvent(3);
+      const eventDatesModel = await this.eventDatesTable.getDatesFromEvent(event.id);
       return new EventModel(event, eventDatesModel.eventDates);
     });
 
