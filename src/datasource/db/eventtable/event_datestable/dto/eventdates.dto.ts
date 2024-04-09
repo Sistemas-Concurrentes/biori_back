@@ -1,10 +1,10 @@
 import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
 export class EventDatesDto {
   @IsNotEmpty()
-  event_id: number;
+  eventId: number;
 
   @IsNotEmpty()
-  date_event: Date;
+  dateEvent: Date;
 
   @IsDate()
   createdAt: Date;
@@ -17,8 +17,8 @@ export class EventDatesDto {
 
 
   constructor(json: any) {
-    this.event_id = json.event_id;
-    this.date_event = json.dates_event;
+    this.eventId = json.event_id;
+    this.dateEvent = json.dates_event;
 
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
