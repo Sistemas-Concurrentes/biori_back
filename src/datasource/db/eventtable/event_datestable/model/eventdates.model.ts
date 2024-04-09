@@ -3,14 +3,16 @@ import { EventDatesDto } from '../dto/eventdates.dto';
 
 export class EventDatesModel {
   @IsNotEmpty()
-  eventDates: Date[];
-
-
+  eventDates: Map <number, Date[]>;
 
   constructor(eventDatesDto: EventDatesDto[]) {
-    this.eventDates = [];
+    this.eventDates = new Map();
     eventDatesDto.forEach((eventDatesDto) => {
-      this.eventDates.push(eventDatesDto.date_event);
+      if(!this.eventDates.has(eventDatesDto.eventId)){
+        this.eventDates.set(eventDatesDto.eventId, [eventDatesDto.dateEvent]);
+      } else {
+        this.eventDates.get(eventDatesDto.eventId).push(eventDatesDto.dateEvent);
+      }
     });
   }
 }

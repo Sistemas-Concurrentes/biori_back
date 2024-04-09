@@ -9,10 +9,9 @@ export class EventDatesTable {
   constructor(private dbConnection: DbConnection) {
   }
 
-  async getDatesFromEvent(idEvent: number): Promise<EventDatesModel> {
-
-    const query = 'SELECT * FROM event_dates where event_id = ?';
-    const eventDatesJson = await this.dbConnection.runQuery(query, [idEvent]);
+  async getAll(): Promise<EventDatesModel> {
+    const query = 'SELECT * FROM event_dates';
+    const eventDatesJson = await this.dbConnection.runQuery(query);
 
     const eventDatesDtos =  eventDatesJson.map((eventDateJson: any) => {
       return new EventDatesDto(eventDateJson);

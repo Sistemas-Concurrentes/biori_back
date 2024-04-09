@@ -24,10 +24,12 @@ export class EventTable {
       'INNER JOIN user u on t.user_id = u.id;';
 
     const events = await this.dbConnection.runQuery(query);
+    const dates = await this.eventDatesTable.getAll();
 
-    const eventPromises = events.map(async (event: any) => {
-      const eventDatesModel = await this.eventDatesTable.getDatesFromEvent(event.id);
-      return new EventModel(event, eventDatesModel.eventDates);
+    const tags = await this.eventTagTable.getAll();
+
+   return events.map((event: any) => {
+      return new EventModel(event, dates.eventDates.get(event.id));
     });
 
     return await Promise.all(eventPromises);
