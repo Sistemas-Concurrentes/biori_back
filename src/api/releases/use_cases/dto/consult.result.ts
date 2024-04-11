@@ -1,7 +1,7 @@
 import { Group } from '../../../../datasource/db/advertisementtable/model/groupadvertisement.model';
 import { TagModel } from '../../../../datasource/db/tagtable/model/tag.model';
 
-interface Advertisement{
+export interface Advertisement{
   id: number;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ interface Advertisement{
   groups: Group[];
 }
 
-interface Report{
+export interface Report{
   id: number;
   title: string;
   description: string;
@@ -20,7 +20,7 @@ interface Report{
   updatedAt: Date;
 }
 
-interface Event{
+export interface Event{
   id: number;
   title: string;
   category: string;
