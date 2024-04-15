@@ -22,7 +22,7 @@ export class ValidationUsecase {
     await this.userTable.updateUserRegisterCode(user.user_name);
 
     return {
-      token: this.myJwt.getAccessToken(user.user_name, user.name),
+      token: this.myJwt.getAccessToken(user.id, user.user_name, user.name),
     };
 
   }

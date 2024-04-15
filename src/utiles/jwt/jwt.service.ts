@@ -6,8 +6,8 @@ import { JwtModel, jwtModelFromJson } from './model/jwt.model';
 export class MyJwtService {
 
   constructor(private jwtService: JwtService) {}
-  getAccessToken(username: string, name: string): string {
-    const jwtModel = new JwtModel(username, name);
+  getAccessToken(id: number, username: string, name: string): string {
+    const jwtModel = new JwtModel(id, username, name);
     const payload = jwtModel.toJson();
     return this.jwtService.sign(payload);
   }
@@ -29,4 +29,7 @@ export class MyJwtService {
     return this.getJwtModel(token).username;
   }
 
+  getUserId(token: string): number {
+    return this.getJwtModel(token).id;
+  }
 }

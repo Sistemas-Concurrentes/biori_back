@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
     }
 
     request['user'] = this.jwtService.getUserName(token);
+    request['id'] = this.jwtService.getUserId(token);
 
     return true;
   }

@@ -3,7 +3,6 @@ import { UserTable } from '../../../datasource/db/usertable/usertable.usecase';
 import { UsertableModel } from '../../../datasource/db/usertable/model/usertable.model';
 import { RegisterDto } from '../controller/dto/register.dto';
 import { RegisterUsecaseResult } from './dto/registerUsecase.result';
-import { MyJwtService } from '../../../utiles/jwt/jwt.service';
 import { encodePassword} from '../../../utiles/bcrypt/mybcrypt';
 import { MyMailerService } from '../../../utiles/mailer/mailer.service';
 
@@ -12,7 +11,6 @@ import { MyMailerService } from '../../../utiles/mailer/mailer.service';
 export class RegisterUsecase {
 
   constructor(private userTable: UserTable,
-              private myJwt: MyJwtService,
               private myMailer: MyMailerService) {}
 
   async run(registerDto:RegisterDto): Promise<RegisterUsecaseResult> {
@@ -34,7 +32,6 @@ export class RegisterUsecase {
 
     return {
       user_name: registerDto.user_name,
-      token: this.myJwt.getAccessToken(registerDto.user_name, registerDto.name),
     }
   }
 }
