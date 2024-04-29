@@ -3,6 +3,7 @@ import { DbConnection } from '../db.connection';
 import { EventModel } from './model/event.model';
 import { EventDatesTable } from './event_datestable/event_datestable.usecase';
 import { EventTagTable } from './event_tagtable/event_tagtable.usecase';
+import {EventDto} from './dto/event.dto';
 
 
 @Injectable()
@@ -30,8 +31,33 @@ export class EventTable {
 
     const tags = await this.eventTagTable.getAll();
 
-   return events.map((event: any) => {
+    return events.map((event: any) => {
       return new EventModel(event, dates.eventDates.get(event.id), tags.tagModels.get(event.id));
     });
+  }
+
+  async createEvent(event: EventDto): Promise<void> {
+    try {
+      const query = 'INSERT INTO event (title, category, description, organiser, location) ' +
+          'VALUES (?, ?, ?, ?, ?);';
+
+      const values = [
+        event.titulo, event.categoria, event.descripcion, event.teacherId,
+        event.localizacion];
+      const result = await this.dbConnection.runQuery(query, values);
+
+      const eventId = result.insertId;
+      await this.eventDatesTable.createEventDates(eventId, event.fechas);
+      await this.eventTagTable.asignTagsToEvent(eventId, event.tagsButtons);
+
+      if (event.fechaFinInscripcion) {
+        const query = 'INSERT INTO event_with_register (id_event, date_end_inscription) VALUES (?, ?)';
+        await this.dbConnection.runQuery(query,
+            [eventId, event.fechaFinInscripcion]);
+      }
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 }
