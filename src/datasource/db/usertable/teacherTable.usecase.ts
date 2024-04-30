@@ -11,6 +11,6 @@ export class TeacherTable {
     const query = 'SELECT id FROM teacher WHERE user_id = ?';
     const id = await this.dbConnection.runQuery(query, [teacherId]);
 
-    return id ? id[0].id : 0;
+    return id.length > 0 ? id[0].id : 0;
   }
 }
