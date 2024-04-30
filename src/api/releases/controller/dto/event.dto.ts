@@ -21,7 +21,7 @@ export class AddEventDto {
   @IsNotEmpty()
   tagsButtons: Tag[];
 
-  fechaFinInscripcion: Date;
+  fechaFinInscripcion: Date | null;
 
 }
 
