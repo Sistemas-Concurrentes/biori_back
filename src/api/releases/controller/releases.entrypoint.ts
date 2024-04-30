@@ -28,7 +28,7 @@ export class ReleasesEntrypoint {
   }
 
   @UseGuards(AuthGuard)
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.CREATED)
   @Post('addEvent')
   async addEvent(@Body() addEventDto: AddEventDto, @Request() request: any) {
     return this.addEventUseCase.run(addEventDto, request.id);

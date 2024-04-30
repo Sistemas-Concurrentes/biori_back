@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {EventTable} from '../../../datasource/db/eventtable/eventtable.usecase';
 import {AddEventDto} from '../controller/dto/event.dto';
 import {EventDto} from '../../../datasource/db/eventtable/dto/event.dto';
@@ -6,6 +6,7 @@ import {
   TeacherTable,
 } from '../../../datasource/db/usertable/teacherTable.usecase';
 import {TagModel} from '../../../datasource/db/tagtable/model/tag.model';
+import {AddEventResult} from './dto/add_event.result';
 
 @Injectable()
 export class AddEventUsecase {
@@ -15,11 +16,11 @@ export class AddEventUsecase {
       private teacherTable: TeacherTable) {
   }
 
-  async run(addEventDto: AddEventDto, userId: number): Promise<boolean> {
+  async run(addEventDto: AddEventDto, userId: number): Promise<AddEventResult> {
     const teacherId: number = await this.teacherTable.getUserIdByTeacherId(
         userId);
     if (teacherId == 0) {
-      return false;
+      throw new HttpException('Teacher not found', HttpStatus.FORBIDDEN);
     }
 
     const eventDto: EventDto = {
@@ -36,6 +37,8 @@ export class AddEventUsecase {
     };
     await this.eventTable.createEvent(eventDto);
 
-    return true;
+    return {
+      titulo: addEventDto.titulo,
+    };
   }
 }
