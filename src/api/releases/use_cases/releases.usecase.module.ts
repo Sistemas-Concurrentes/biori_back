@@ -7,6 +7,8 @@ import {AddEventUsecase} from './add_event.usecase';
 import {
   UsertableModule,
 } from '../../../datasource/db/usertable/usertable.module';
+import {AddAdvertisementUsecase} from './add_advertisement.usecase';
+import {AddReportUsecase} from './add_report.usecase';
 
 @Module({
   imports: [
@@ -15,7 +17,15 @@ import {
     EventtableModule,
     UsertableModule],
   controllers: [],
-  providers: [ConsultUsecase, AddEventUsecase],
-  exports: [ConsultUsecase, AddEventUsecase],
+  providers: [
+    ConsultUsecase,
+    AddEventUsecase,
+    AddAdvertisementUsecase,
+    AddReportUsecase],
+  exports: [
+    ConsultUsecase,
+    AddEventUsecase,
+    AddAdvertisementUsecase,
+    AddReportUsecase],
 })
 export class ReleasesUsecaseModule {}
