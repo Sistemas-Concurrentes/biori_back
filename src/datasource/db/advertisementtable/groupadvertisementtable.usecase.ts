@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DbConnection } from '../db.connection';
 import { GroupAdvertisementModel } from './model/groupadvertisement.model';
 import { GroupadvertisementDto } from './dto/groupadvertisement.dto';
+import {TagModel} from '../tagtable/model/tag.model';
 
 
 @Injectable()
@@ -19,6 +20,14 @@ export class GroupAdvertisementTable {
     });
 
     return new GroupAdvertisementModel(groupAdvsDtos);
+  }
+
+  async asignGroupsToAdvertisement(advertisementId: number, groups: number[]) {
+    const placeholders = groups.map(() => '(?, ?)').join(', ');
+    const query = `INSERT INTO group_advertisements (advertisement_id, group_id) VALUES ${placeholders}`;
+
+    const values = groups.flatMap(group => [advertisementId, group]);
+    return await this.dbConnection.runQuery(query, values);
   }
 
 }
