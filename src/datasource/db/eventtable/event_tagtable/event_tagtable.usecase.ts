@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DbConnection } from '../../db.connection';
 import { EventTagModel } from './model/eventtag.model';
 import { EventtagDto } from './dto/eventtag.dto';
+import {TagModel} from '../../tagtable/model/tag.model';
 
 
 @Injectable()
@@ -19,5 +20,13 @@ export class EventTagTable {
     });
 
     return new EventTagModel(eventTagDtos);
+  }
+
+  async asignTagsToEvent(eventId: number, tagsButtons: TagModel[]) {
+    const placeholders = tagsButtons.map(() => '(?, ?)').join(', ');
+    const query = `INSERT INTO event_tag (event_id, tag_id) VALUES ${placeholders}`;
+
+    const values = tagsButtons.flatMap(tag => [eventId, tag.tagId]);
+    return await this.dbConnection.runQuery(query, values);
   }
 }

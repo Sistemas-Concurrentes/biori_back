@@ -3,6 +3,7 @@ import { DbConnection } from '../db.connection';
 import { AdvertisementModel } from './model/advertisement.model';
 import { GroupAdvertisementTable } from './groupadvertisementtable.usecase';
 import { GroupAdvertisementModel } from './model/groupadvertisement.model';
+import {AdvertisementDto} from './dto/advertisement.dto';
 
 
 @Injectable()
@@ -26,6 +27,24 @@ export class Advertisementtable {
     }
     );
 
+  }
+
+  async createAdvertisement(advertisement: AdvertisementDto): Promise<void> {
+    try {
+      const query = 'INSERT INTO advertisement (title, description, user_id) ' +
+          'VALUES (?, ?, ?);';
+
+      const values = [
+        advertisement.title, advertisement.description, advertisement.userId];
+      const result = await this.dbConnection.runQuery(query, values);
+      const advertisementId = result.insertId;
+
+      await this.groupAdvertisement.asignGroupsToAdvertisement(advertisementId,
+          advertisement.groups);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 
 }

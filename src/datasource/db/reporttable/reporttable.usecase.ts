@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DbConnection } from '../db.connection';
 import { ReportModel } from './model/report.model';
+import {ReportDto} from './dto/report.dto';
 
 
 @Injectable()
@@ -22,6 +23,20 @@ export class ReportTable {
 
     return reports.map((report) => new ReportModel(report));
 
+  }
+
+  async createReport(report: ReportDto): Promise<void> {
+    try {
+      const query = 'INSERT INTO reports (title, description, publisher) ' +
+          'VALUES (?, ?, ?);';
+
+      const values = [
+        report.titulo, report.descripcion, report.teacherId];
+      await this.dbConnection.runQuery(query, values);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 
 }
