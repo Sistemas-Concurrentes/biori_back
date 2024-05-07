@@ -21,6 +21,7 @@ export class EventTable {
       'LEFT JOIN (' +
         'SELECT event_id, COUNT(DISTINCT student_id) as likes_count ' +
         'FROM likes_student_event ' +
+        'WHERE is_followed=true ' +
         'GROUP BY event_id' +
       ') l on e.id = l.event_id ' +
       'INNER JOIN teacher t on e.organiser = t.id ' +
