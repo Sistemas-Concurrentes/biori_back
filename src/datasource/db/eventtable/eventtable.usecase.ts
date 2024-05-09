@@ -4,13 +4,15 @@ import { EventModel } from './model/event.model';
 import { EventDatesTable } from './event_datestable/event_datestable.usecase';
 import { EventTagTable } from './event_tagtable/event_tagtable.usecase';
 import {EventDto} from './dto/event.dto';
+import {RegisteredTable} from '../registeredtable/registeredtable.usecase';
 
 
 @Injectable()
 export class EventTable {
   constructor(private dbConnection: DbConnection,
               private eventDatesTable: EventDatesTable,
-              private eventTagTable: EventTagTable) {
+              private eventTagTable: EventTagTable,
+              private registeredTable: RegisteredTable) {
   }
 
   async getAll(): Promise<EventModel[]> {
@@ -21,6 +23,7 @@ export class EventTable {
       'LEFT JOIN (' +
         'SELECT event_id, COUNT(DISTINCT student_id) as likes_count ' +
         'FROM likes_student_event ' +
+        'WHERE is_followed=true ' +
         'GROUP BY event_id' +
       ') l on e.id = l.event_id ' +
       'INNER JOIN teacher t on e.organiser = t.id ' +
@@ -51,9 +54,8 @@ export class EventTable {
       await this.eventTagTable.asignTagsToEvent(eventId, event.tagsButtons);
 
       if (event.fechaFinInscripcion) {
-        const query = 'INSERT INTO event_with_register (id_event, date_end_inscription) VALUES (?, ?)';
-        await this.dbConnection.runQuery(query,
-            [eventId, event.fechaFinInscripcion]);
+        await this.registeredTable.insertRegisterEvent(eventId,
+            event.fechaFinInscripcion);
       }
     } catch (e) {
       console.log(e);
