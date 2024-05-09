@@ -17,4 +17,17 @@ export class RegisteredTable {
       throw e;
     }
   }
+
+  async getRegisterIdEventById(eventId: number): Promise<any> {
+    try {
+      const query = 'SELECT id FROM event_with_register WHERE id_event = ?';
+      const values = [eventId];
+      const response = await this.dbConnection.runQuery(query, values);
+
+      return response.length > 0 ? response[0].id : -1;
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  }
 }
