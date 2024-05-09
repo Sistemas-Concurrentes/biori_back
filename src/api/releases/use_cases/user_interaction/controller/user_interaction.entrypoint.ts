@@ -7,7 +7,7 @@ import {AuthGuard} from '../../../../auth/guards/auth.guard';
 import {LikeDto} from './dto/like.dto';
 import {LikeUsecase} from '../use_cases/like.usecase';
 
-@Controller('releases/events')
+@Controller('releases/event')
 export class UserInteractionEntrypoint {
   constructor(private likeUsecase: LikeUsecase) {
   }
