@@ -10,7 +10,7 @@ import {
 import {
   AddAdvertisementUsecase,
 } from './advertisements/use_cases/add_advertisement.usecase';
-import {AddReportUsecase} from './add_report.usecase';
+import {AddReportUsecase} from './reports/use_cases/add_report.usecase';
 
 @Module({
   imports: [

@@ -1,12 +1,14 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {
   TeacherTable,
-} from '../../../datasource/db/usertable/teacherTable.usecase';
+} from '../../../../../datasource/db/usertable/teacherTable.usecase';
 import {AddReportDto} from '../controller/dto/report.dto';
-import {ReportDto} from '../../../datasource/db/reporttable/dto/report.dto';
+import {
+  ReportDto,
+} from '../../../../../datasource/db/reporttable/dto/report.dto';
 import {
   ReportTable,
-} from '../../../datasource/db/reporttable/reporttable.usecase';
+} from '../../../../../datasource/db/reporttable/reporttable.usecase';
 import {AddReportResult} from './dto/add_report.result';
 
 @Injectable()

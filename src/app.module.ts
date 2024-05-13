@@ -11,6 +11,9 @@ import {
 import {
   AdvertisementsControllerModule,
 } from './api/releases/use_cases/advertisements/controller/advertisements.module';
+import {
+  ReportControllerModule,
+} from './api/releases/use_cases/reports/controller/reports.module';
 
 @Module({
   imports: [
@@ -18,6 +21,7 @@ import {
     ReleasesControllerModule,
     EventsControllerModule,
     AdvertisementsControllerModule,
+    ReportControllerModule,
     RouterModule.register(
         [
           {
@@ -35,6 +39,10 @@ import {
               {
                 path: 'advertisement',
                 module: AdvertisementsControllerModule,
+              },
+              {
+                path: 'report',
+                module: ReportControllerModule,
               },
             ],
 
