@@ -17,7 +17,7 @@ import {AddReportDto} from './dto/report.dto';
 import {AddAdvertisementUsecase} from '../use_cases/add_advertisement.usecase';
 import {AddReportUsecase} from '../use_cases/add_report.usecase';
 
-@Controller('releases')
+@Controller()
 export class ReleasesEntrypoint {
   constructor(
       private consultUseCase: ConsultUsecase,

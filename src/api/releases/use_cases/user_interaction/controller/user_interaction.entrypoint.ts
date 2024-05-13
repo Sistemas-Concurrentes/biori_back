@@ -9,7 +9,7 @@ import {LikeUsecase} from '../use_cases/like.usecase';
 import {SubscribeDto} from './dto/subscribe.dto';
 import {SubscribeUsecase} from '../use_cases/subscribe.usecase';
 
-@Controller('releases/event')
+@Controller()
 export class UserInteractionEntrypoint {
   constructor(
       private likeUsecase: LikeUsecase,

@@ -17,8 +17,8 @@ import {
     MyJwtModule,
     AuthGuardModule,
     ReleasesUsecaseModule,
-    UserInteractionUsecaseModule],
-  controllers: [ReleasesEntrypoint, UserInteractionEntrypoint],
+  ],
+  controllers: [ReleasesEntrypoint],
   providers: [],
   exports: [ ],
 })

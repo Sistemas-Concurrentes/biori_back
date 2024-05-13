@@ -2,7 +2,7 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterUsecase } from '../use_cases/register.usecase';
 import { RegisterDto } from './dto/register.dto';
 
-@Controller('auth')
+@Controller()
 export class AuthRegisterEntrypoint {
   constructor (private registerUsecase: RegisterUsecase) {}
 

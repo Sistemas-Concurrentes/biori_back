@@ -7,7 +7,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { ValidationModel } from './model/validation.model';
 import { ResendUsecase } from '../use_cases/resend.usecase';
 
-@Controller('auth')
+@Controller()
 export class AuthLoginEntrypoint {
   constructor (private loginUseCase: LoginUsecase, private validateUseCase: ValidationUsecase,
                private resendUseCase: ResendUsecase) {}
