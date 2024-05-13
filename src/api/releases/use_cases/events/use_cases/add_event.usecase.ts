@@ -2,7 +2,7 @@ import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {
   EventTable,
 } from '../../../../../datasource/db/eventtable/eventtable.usecase';
-import {AddEventDto} from '../../../controller/dto/event.dto';
+import {AddEventDto} from '../controller/dto/event.dto';
 import {EventDto} from '../../../../../datasource/db/eventtable/dto/event.dto';
 import {
   TeacherTable,

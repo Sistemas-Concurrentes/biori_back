@@ -8,7 +8,7 @@ import {LikeDto} from './dto/like.dto';
 import {LikeUsecase} from '../use_cases/like.usecase';
 import {SubscribeDto} from './dto/subscribe.dto';
 import {SubscribeUsecase} from '../use_cases/subscribe.usecase';
-import {AddEventDto} from '../../../controller/dto/event.dto';
+import {AddEventDto} from './dto/event.dto';
 import {AddEventUsecase} from '../use_cases/add_event.usecase';
 
 @Controller()
