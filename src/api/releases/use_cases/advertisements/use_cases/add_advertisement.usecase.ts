@@ -1,13 +1,13 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {
   TeacherTable,
-} from '../../../datasource/db/usertable/teacherTable.usecase';
+} from '../../../../../datasource/db/usertable/teacherTable.usecase';
 import {
   Advertisementtable,
-} from '../../../datasource/db/advertisementtable/advertisementtable.usecase';
+} from '../../../../../datasource/db/advertisementtable/advertisementtable.usecase';
 import {
   AdvertisementDto,
-} from '../../../datasource/db/advertisementtable/dto/advertisement.dto';
+} from '../../../../../datasource/db/advertisementtable/dto/advertisement.dto';
 import {AddAdvertisementResult} from './dto/add_advertisement.result';
 import {AddAdvertisementDto} from '../controller/dto/advertisement.dto';
 

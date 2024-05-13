@@ -1,5 +1,5 @@
 import {IsNotEmpty} from 'class-validator';
-import {Tag} from './tag.dto';
+import {Tag} from '../../../../controller/dto/tag.dto';
 
 export class AddAdvertisementDto {
   @IsNotEmpty()

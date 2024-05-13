@@ -8,13 +8,16 @@ import {RouterModule} from '@nestjs/core';
 import {
   EventsControllerModule,
 } from './api/releases/use_cases/events/controller/events.module';
+import {
+  AdvertisementsControllerModule,
+} from './api/releases/use_cases/advertisements/controller/advertisements.module';
 
 @Module({
   imports: [
     DbModule, AuthControllerModule,
     ReleasesControllerModule,
     EventsControllerModule,
-
+    AdvertisementsControllerModule,
     RouterModule.register(
         [
           {
@@ -28,6 +31,10 @@ import {
               {
                 path: 'event',
                 module: EventsControllerModule,
+              },
+              {
+                path: 'advertisement',
+                module: AdvertisementsControllerModule,
               },
             ],
 

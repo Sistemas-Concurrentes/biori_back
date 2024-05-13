@@ -7,7 +7,9 @@ import {AddEventUsecase} from './events/use_cases/add_event.usecase';
 import {
   UsertableModule,
 } from '../../../datasource/db/usertable/usertable.module';
-import {AddAdvertisementUsecase} from './add_advertisement.usecase';
+import {
+  AddAdvertisementUsecase,
+} from './advertisements/use_cases/add_advertisement.usecase';
 import {AddReportUsecase} from './add_report.usecase';
 
 @Module({
