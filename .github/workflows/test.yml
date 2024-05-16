@@ -1,0 +1,21 @@
+name: Biori
+
+on:
+  push:
+
+env:
+  IMAGE_TAG: nestjs-api
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Build the Docker image
+        run: docker build -t $IMAGE_TAG --target=create-build .
+
+      - name: Run tests
+        run: docker run $IMAGE_TAG sh -c 'npm run test'
