@@ -6,15 +6,22 @@ import { AuthControllerModule } from './api/auth/controller/auth.controller.modu
 import { ReleasesControllerModule } from './api/releases/controller/releases.controller.module';
 import {RouterModule} from '@nestjs/core';
 import {
-  UserInteractionModule,
-} from './api/releases/use_cases/user_interaction/controller/user_interaction.module';
+  EventsControllerModule,
+} from './api/releases/use_cases/events/controller/events.module';
+import {
+  AdvertisementsControllerModule,
+} from './api/releases/use_cases/advertisements/controller/advertisements.module';
+import {
+  ReportControllerModule,
+} from './api/releases/use_cases/reports/controller/reports.module';
 
 @Module({
   imports: [
     DbModule, AuthControllerModule,
     ReleasesControllerModule,
-    UserInteractionModule,
-
+    EventsControllerModule,
+    AdvertisementsControllerModule,
+    ReportControllerModule,
     RouterModule.register(
         [
           {
@@ -27,7 +34,15 @@ import {
             children: [
               {
                 path: 'event',
-                module: UserInteractionModule,
+                module: EventsControllerModule,
+              },
+              {
+                path: 'advertisement',
+                module: AdvertisementsControllerModule,
+              },
+              {
+                path: 'report',
+                module: ReportControllerModule,
               },
             ],
 

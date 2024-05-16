@@ -8,12 +8,22 @@ import {LikeDto} from './dto/like.dto';
 import {LikeUsecase} from '../use_cases/like.usecase';
 import {SubscribeDto} from './dto/subscribe.dto';
 import {SubscribeUsecase} from '../use_cases/subscribe.usecase';
+import {AddEventDto} from './dto/event.dto';
+import {AddEventUsecase} from '../use_cases/add_event.usecase';
 
 @Controller()
-export class UserInteractionEntrypoint {
+export class EventsEntrypoint {
   constructor(
+      private addEventUseCase: AddEventUsecase,
       private likeUsecase: LikeUsecase,
       private subscribeUsecase: SubscribeUsecase) {
+  }
+
+  @UseGuards(AuthGuard)
+  @HttpCode(HttpStatus.CREATED)
+  @Post('addEvent')
+  async addEvent(@Body() addEventDto: AddEventDto, @Request() request: any) {
+    return this.addEventUseCase.run(addEventDto, request.id);
   }
 
   @UseGuards(AuthGuard)
