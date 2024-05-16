@@ -11,19 +11,27 @@ describe('LoginUsecase', () => {
     getAccessToken: jest.fn(() => 'string'),
   };
   const mockUserTable = {
-    getUserByEmail: jest.fn(() => new Promise((resolve) => resolve({
-      id: 1,
-      name: 'name',
-      surname: 'surname',
-      user_name: 'username',
-      birth_date: new Date(),
-      password: 'hashedPassword',
-      phone_number: 'phone',
-      register_code: 1,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: new Date(),
-    }))),
+    getUserByEmail: jest.fn(),
+  };
+
+  const resultUserTable = {
+    id: 1,
+    name: 'name',
+    surname: 'surname',
+    user_name: 'username',
+    birth_date: new Date(),
+    password: 'hashedPassword',
+    phone_number: 'phone',
+    register_code: 1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: new Date(),
+  };
+  const resultLoginUsecase = {
+    id: resultUserTable.id,
+    user_name: resultUserTable.user_name,
+    token: 'string',
+    register_code: resultUserTable.register_code,
   };
 
   beforeEach(async () => {
@@ -41,6 +49,8 @@ describe('LoginUsecase', () => {
       ],
     }).compile();
     jest.spyOn(bcrypt, 'comparePassword').mockReturnValue(true);
+    jest.spyOn(mockUserTable, 'getUserByEmail').
+      mockResolvedValue(resultUserTable);
 
     useCase = module.get<LoginUsecase>(LoginUsecase);
   });
@@ -62,12 +72,8 @@ describe('LoginUsecase', () => {
 
   it('should return a LoginUsecaseResult if user and password are valid',
     async () => {
-      expect(await useCase.run('username', 'password')).toEqual({
-        id: 1,
-        user_name: 'username',
-        token: 'string',
-        register_code: 1,
-      });
+      expect(await useCase.run('username', 'password')).
+        toEqual(resultLoginUsecase);
     });
 
   it('should check that if UserTable is called with user param',
