@@ -39,9 +39,10 @@ export class EventTable {
     const dates = await this.eventDatesTable.getAll();
 
     const tags = await this.eventTagTable.getAll();
-
+    const groups = await this.eventGroupTable.getAll();
     return events.map((event: any) => {
-      return new EventModel(event, dates.eventDates.get(event.id), tags.tagModels.get(event.id));
+      return new EventModel(event, dates.eventDates.get(event.id),
+        tags.tagModels.get(event.id), groups.groupModel.get(event.id));
     });
   }
 
