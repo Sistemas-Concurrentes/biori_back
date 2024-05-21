@@ -1,5 +1,4 @@
 import {IsArray, IsNotEmpty} from 'class-validator';
-import {Tag} from '../../../../controller/dto/tag.dto';
 
 export class AddEventDto {
   @IsNotEmpty()
@@ -19,7 +18,7 @@ export class AddEventDto {
   fechas: Date[];
 
   @IsNotEmpty()
-  tagsButtons: Tag[];
+  associatedIds: number[];
 
   fechaFinInscripcion: Date | null;
 

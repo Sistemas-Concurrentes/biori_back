@@ -22,7 +22,7 @@ export class EventDto {
   teacherId: number;
 
   @IsNotEmpty()
-  tagsButtons: TagModel[];
+  associatedIds: number[];
 
   fechaFinInscripcion: Date;
 
