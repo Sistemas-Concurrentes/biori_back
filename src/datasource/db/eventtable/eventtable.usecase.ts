@@ -2,15 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { DbConnection } from '../db.connection';
 import { EventModel } from './model/event.model';
 import { EventDatesTable } from './event_datestable/event_datestable.usecase';
-import { EventTagTable } from './event_tagtable/event_tagtable.usecase';
+import { EventGroupTable } from './event_grouptable/event_grouptable.usecase';
 import {EventDto} from './dto/event.dto';
 import {RegisteredTable} from '../registeredtable/registeredtable.usecase';
+import { EventTagTable } from './event_tagtable/event_tagtable.usecase';
 
+export enum EventEnum {
+  tagEvent,
+  groupEvent
+}
 
 @Injectable()
 export class EventTable {
   constructor(private dbConnection: DbConnection,
               private eventDatesTable: EventDatesTable,
+              private eventGroupTable: EventGroupTable,
               private eventTagTable: EventTagTable,
               private registeredTable: RegisteredTable) {
   }
@@ -33,13 +39,15 @@ export class EventTable {
     const dates = await this.eventDatesTable.getAll();
 
     const tags = await this.eventTagTable.getAll();
-
+    const groups = await this.eventGroupTable.getAll();
     return events.map((event: any) => {
-      return new EventModel(event, dates.eventDates.get(event.id), tags.tagModels.get(event.id));
+      return new EventModel(event, dates.eventDates.get(event.id),
+        tags.tagModels.get(event.id), groups.groupModel.get(event.id));
     });
   }
 
-  async createEvent(event: EventDto): Promise<void> {
+  async createEvent(
+    event: EventDto, eventType: EventEnum = EventEnum.tagEvent): Promise<void> {
     try {
       const query = 'INSERT INTO event (title, category, description, organiser, location) ' +
           'VALUES (?, ?, ?, ?, ?);';
@@ -51,7 +59,13 @@ export class EventTable {
 
       const eventId = result.insertId;
       await this.eventDatesTable.createEventDates(eventId, event.fechas);
-      await this.eventTagTable.asignTagsToEvent(eventId, event.tagsButtons);
+
+      if (eventType == EventEnum.tagEvent) {
+        await this.eventTagTable.asignTagsToEvent(eventId, event.associatedIds);
+      } else if (eventType == EventEnum.groupEvent) {
+        await this.eventGroupTable.asignGroupToEvent(eventId,
+          event.associatedIds);
+      }
 
       if (event.fechaFinInscripcion) {
         await this.registeredTable.insertRegisterEvent(eventId,

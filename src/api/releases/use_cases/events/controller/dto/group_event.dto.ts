@@ -1,6 +1,6 @@
-import {IsArray, IsNotEmpty} from 'class-validator';
+import { IsArray, IsNotEmpty } from 'class-validator';
 
-export class AddEventDto {
+export class AddGroupEventDto {
   @IsNotEmpty()
   titulo: string;
 
@@ -18,7 +18,7 @@ export class AddEventDto {
   fechas: Date[];
 
   @IsNotEmpty()
-  associatedIds: number[];
+  groupId: number[];
 
   fechaFinInscripcion: Date | null;
 

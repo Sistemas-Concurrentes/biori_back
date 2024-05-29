@@ -1,5 +1,6 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {
+  EventEnum,
   EventTable,
 } from '../../../../../datasource/db/eventtable/eventtable.usecase';
 import {AddEventDto} from '../controller/dto/event.dto';
@@ -7,7 +8,6 @@ import {EventDto} from '../../../../../datasource/db/eventtable/dto/event.dto';
 import {
   TeacherTable,
 } from '../../../../../datasource/db/usertable/teacherTable.usecase';
-import {TagModel} from '../../../../../datasource/db/tagtable/model/tag.model';
 import {AddEventResult} from './dto/add_event.result';
 
 @Injectable()
@@ -18,7 +18,9 @@ export class AddEventUsecase {
       private teacherTable: TeacherTable) {
   }
 
-  async run(addEventDto: AddEventDto, userId: number): Promise<AddEventResult> {
+  async run(
+    addEventDto: AddEventDto, userId: number,
+    eventType: EventEnum): Promise<AddEventResult> {
     const teacherId: number = await this.teacherTable.getUserIdByTeacherId(
         userId);
     if (teacherId == 0) {
@@ -33,11 +35,9 @@ export class AddEventUsecase {
       localizacion: addEventDto.localizacion,
       fechaFinInscripcion: addEventDto.fechaFinInscripcion,
       fechas: addEventDto.fechas.map(fecha => new Date(fecha)),
-      tagsButtons: addEventDto.tagsButtons.map(tag => {
-        return new TagModel(tag.id, tag.name);
-      }),
+      associatedIds: addEventDto.associatedIds,
     };
-    await this.eventTable.createEvent(eventDto);
+    await this.eventTable.createEvent(eventDto, eventType);
 
     return {
       titulo: addEventDto.titulo,

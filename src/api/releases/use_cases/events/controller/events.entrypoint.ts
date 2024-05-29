@@ -1,15 +1,22 @@
 import {
+  Body,
   Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Request,
   UseGuards,
-  Body, Request, Post, HttpCode, HttpStatus,
 } from '@nestjs/common';
-import {AuthGuard} from '../../../../auth/guards/auth.guard';
-import {LikeDto} from './dto/like.dto';
-import {LikeUsecase} from '../use_cases/like.usecase';
-import {SubscribeDto} from './dto/subscribe.dto';
-import {SubscribeUsecase} from '../use_cases/subscribe.usecase';
-import {AddEventDto} from './dto/event.dto';
-import {AddEventUsecase} from '../use_cases/add_event.usecase';
+import { AuthGuard } from '../../../../auth/guards/auth.guard';
+import { LikeDto } from './dto/like.dto';
+import { LikeUsecase } from '../use_cases/like.usecase';
+import { SubscribeDto } from './dto/subscribe.dto';
+import { SubscribeUsecase } from '../use_cases/subscribe.usecase';
+import { AddEventDto } from './dto/event.dto';
+import { AddEventUsecase } from '../use_cases/add_event.usecase';
+import {
+  EventEnum,
+} from '../../../../../datasource/db/eventtable/eventtable.usecase';
 
 @Controller()
 export class EventsEntrypoint {
@@ -23,7 +30,17 @@ export class EventsEntrypoint {
   @HttpCode(HttpStatus.CREATED)
   @Post('addEvent')
   async addEvent(@Body() addEventDto: AddEventDto, @Request() request: any) {
-    return this.addEventUseCase.run(addEventDto, request.id);
+    return this.addEventUseCase.run(addEventDto, request.id,
+      EventEnum.tagEvent);
+  }
+
+  @UseGuards(AuthGuard)
+  @HttpCode(HttpStatus.CREATED)
+  @Post('addGroupEvent')
+  async addGroupEvent(
+    @Body() addEventDto: AddEventDto, @Request() request: any) {
+    return this.addEventUseCase.run(addEventDto, request.id,
+      EventEnum.groupEvent);
   }
 
   @UseGuards(AuthGuard)
