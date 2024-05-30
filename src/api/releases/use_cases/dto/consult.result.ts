@@ -18,8 +18,10 @@ export interface Report{
   id: number;
   title: string;
   description: string;
-  teacherName: string;
-  teacherId: number;
+  userName: string;
+  userId: number;
+  courses: number[];
+  toTeachers: boolean;
   updatedAt: Date;
 }
 

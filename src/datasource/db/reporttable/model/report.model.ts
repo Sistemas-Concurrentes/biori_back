@@ -5,16 +5,25 @@ export class ReportModel {
   id: number;
 
   @IsNotEmpty()
-  teacherId: number;
+  userId: number;
 
   @IsNotEmpty()
-  teacherName: string;
+  userName: string;
 
   @IsNotEmpty()
   title: string;
 
   @IsNotEmpty()
   description: string;
+
+  @IsNotEmpty()
+  to_teachers: boolean;
+
+  @IsNotEmpty()
+  scholarYear: number;
+
+  @IsNotEmpty()
+  courses: number[];
 
   @IsDate()
   createdAt: Date;
@@ -25,13 +34,15 @@ export class ReportModel {
   @IsBoolean()
   isDeleted: boolean;
 
-
-  constructor(json: any) {
+  constructor(json: any, courses: number[]) {
     this.id = json.id;
     this.title = json.title;
     this.description = json.description;
-    this.teacherId = json.publisher;
-    this.teacherName = json.name + ' ' + json.surname;
+    this.userId = json.publisher;
+    this.userName = json.name + ' ' + json.surname;
+    this.to_teachers = json.to_teachers;
+    this.scholarYear = json.scholar_year;
+    this.courses = courses;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;

@@ -8,6 +8,15 @@ export class ReportDto {
   descripcion: string;
 
   @IsNotEmpty()
-  teacherId: number;
+  userId: number;
+
+  @IsNotEmpty()
+  scholarYear: number;
+
+  @IsNotEmpty()
+  toTeachers: boolean;
+
+  @IsNotEmpty()
+  courses: number[];
 }
 

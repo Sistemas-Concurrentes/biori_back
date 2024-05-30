@@ -65,8 +65,10 @@ export class ConsultUsecase {
         id: report.id,
         title: report.title,
         description: report.description,
-        teacherName: report.teacherName,
-        teacherId: report.teacherId,
+        userName: report.userName,
+        userId: report.userId,
+        courses: report.courses,
+        toTeachers: report.to_teachers,
         updatedAt: report.updatedAt
       }
     });

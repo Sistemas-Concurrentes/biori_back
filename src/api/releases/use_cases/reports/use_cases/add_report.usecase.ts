@@ -1,7 +1,4 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {
-  TeacherTable,
-} from '../../../../../datasource/db/usertable/teacherTable.usecase';
+import { Injectable } from '@nestjs/common';
 import {AddReportDto} from '../controller/dto/report.dto';
 import {
   ReportDto,
@@ -15,23 +12,17 @@ import {AddReportResult} from './dto/add_report.result';
 export class AddReportUsecase {
 
   constructor(
-      private reportTable: ReportTable,
-      private teacherTable: TeacherTable) {
+    private reportTable: ReportTable) {
   }
 
   async run(addReport: AddReportDto, userId: number): Promise<AddReportResult> {
-    const teacherId: number = await this.teacherTable.getUserIdByTeacherId(
-        userId);
-    const isTeacherAndCoordinator = teacherId == 0;
-
-    if (isTeacherAndCoordinator) {
-      throw new HttpException('Teacher not found', HttpStatus.FORBIDDEN);
-    }
-
     const reportDto: ReportDto = {
       titulo: addReport.titulo,
       descripcion: addReport.descripcion,
-      teacherId: teacherId,
+      userId: userId,
+      scholarYear: addReport.scholarYear,
+      toTeachers: addReport.toTeachers,
+      courses: addReport.courses,
     };
     await this.reportTable.createReport(reportDto);
 
