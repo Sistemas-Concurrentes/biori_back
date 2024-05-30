@@ -11,8 +11,8 @@ import {
 } from '../../../../../datasource/db/registeredtable/registeredtable.module';
 import {SubscribeUsecase} from './subscribe.usecase';
 import {
-  StudentRegisteredTableModule,
-} from '../../../../../datasource/db/student_registeredtable/student_registeredtable.module';
+  UserRegisteredTableModule,
+} from '../../../../../datasource/db/user_registeredtable/user_registeredtable.module';
 import {AddEventUsecase} from './add_event.usecase';
 import {
   EventtableModule,
@@ -25,7 +25,7 @@ import {
   imports: [
     LikesModule,
     StudentModule,
-    StudentRegisteredTableModule,
+    UserRegisteredTableModule,
     RegisteredTableModule,
     EventtableModule,
     UsertableModule,

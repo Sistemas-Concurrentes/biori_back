@@ -1,33 +1,28 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {
-  StudenttableUsecase,
-} from '../../../../../datasource/db/studenttable/studenttable.usecase';
 import {SubscribeDto} from '../controller/dto/subscribe.dto';
 import {
   RegisteredTable,
 } from '../../../../../datasource/db/registeredtable/registeredtable.usecase';
 import {
-  StudentRegisteredTable,
-} from '../../../../../datasource/db/student_registeredtable/student_registeredtable.usecase';
+  UserRegisteredTable,
+} from '../../../../../datasource/db/user_registeredtable/user_registeredtable.usecase';
 
 @Injectable()
 export class SubscribeUsecase {
 
   constructor(
-      private studentRegisteredTable: StudentRegisteredTable,
-      private studentTable: StudenttableUsecase,
+    private userRegisteredTable: UserRegisteredTable,
       private registeredTable: RegisteredTable) {
   }
 
   async run(subscribeDto: SubscribeDto, userId: number): Promise<boolean> {
-    const studentId = await this.studentTable.getStudentIdByUserId(userId);
     const registerEventId = await this.registeredTable.getRegisterIdEventById(
         subscribeDto.idEvent);
-    const existsInscription = await this.studentRegisteredTable.existsInscription(
-        studentId, registerEventId);
+    const existsInscription = await this.userRegisteredTable.existsInscription(
+      userId, registerEventId);
 
-    if (studentId == 0) {
-      throw new HttpException('student not found', HttpStatus.FORBIDDEN);
+    if (userId == 0) {
+      throw new HttpException('user not found', HttpStatus.FORBIDDEN);
     }
     if (registerEventId == -1) {
       throw new HttpException('register not found', HttpStatus.FORBIDDEN);
@@ -37,7 +32,7 @@ export class SubscribeUsecase {
           HttpStatus.FORBIDDEN);
     }
 
-    await this.studentRegisteredTable.addInscription(studentId,
+    await this.userRegisteredTable.addInscription(userId,
         registerEventId);
 
     return true;
