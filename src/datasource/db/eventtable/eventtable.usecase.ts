@@ -32,8 +32,7 @@ export class EventTable {
         'WHERE is_followed=true ' +
         'GROUP BY event_id' +
       ') l on e.id = l.event_id ' +
-      'INNER JOIN teacher t on e.organiser = t.id ' +
-      'INNER JOIN user u on t.user_id = u.id;';
+      'INNER JOIN user u on e.organiser = u.id;'
 
     const events = await this.dbConnection.runQuery(query);
     const dates = await this.eventDatesTable.getAll();
