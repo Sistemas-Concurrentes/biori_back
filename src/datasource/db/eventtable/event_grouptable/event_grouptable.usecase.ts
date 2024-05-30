@@ -10,7 +10,7 @@ export class EventGroupTable {
 
   async getAll(): Promise<EventGroupModel> {
     const query = 'SELECT ge.*, g.name FROM biori.group_event ge ' +
-      'INNER JOIN biori.group g on ge.group_id = g.id;';
+      'INNER JOIN `group` g on ge.group_id = g.id;';
     const eventGroupJson = await this.dbConnection.runQuery(query);
 
     const eventGroupDto = eventGroupJson.map((eventGroupJson: any) => {
