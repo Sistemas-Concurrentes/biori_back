@@ -1,6 +1,6 @@
 import {IsArray, IsNotEmpty} from 'class-validator';
 
-export class AdvertisementDto {
+export class NoticeDto {
   @IsNotEmpty()
   title: string;
 

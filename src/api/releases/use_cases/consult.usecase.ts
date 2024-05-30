@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import {
-  Advertisement,
+  Notices,
   ConsultResult,
   Report,
   Event,
   EventGroup,
 } from './dto/consult.result';
-import { Advertisementtable } from '../../../datasource/db/advertisementtable/advertisementtable.usecase';
+import {
+  NoticeTable,
+} from '../../../datasource/db/noticetable/noticetable.usecase';
 import { ReportTable } from '../../../datasource/db/reporttable/reporttable.usecase';
 import { EventTable } from '../../../datasource/db/eventtable/eventtable.usecase';
 import {
@@ -20,19 +22,20 @@ export class ConsultUsecase {
   allGeneralEvents: Event[] = [];
   allGroupEvents: EventGroup[] = [];
 
-  constructor(private advertisementTable: Advertisementtable,
+  constructor(
+    private noticeTable: NoticeTable,
               private reportTable: ReportTable,
               private eventTable: EventTable) {}
 
   async run(): Promise<ConsultResult> {
     this.allEvents = await this.eventTable.getAll();
 
-    const allAdvertisements = await this.getAdvertisents();
+    const allNotices = await this.getNotices();
     const allReports= await this.getReports()
     await this.getEvents();
 
     const result: ConsultResult = {
-      advertisements: allAdvertisements,
+      notices: allNotices,
       reports: allReports,
       events: this.allGeneralEvents,
       eventsGroup: this.allGroupEvents,
@@ -43,9 +46,9 @@ export class ConsultUsecase {
     return result;
   }
 
-  async getAdvertisents(): Promise<Advertisement[]> {
-    const allAdvertisements= await this.advertisementTable.getAll();
-    return allAdvertisements.map((advertisement) => {
+  async getNotices(): Promise<Notices[]> {
+    const allNotices = await this.noticeTable.getAll();
+    return allNotices.map((advertisement) => {
       return {
         id: advertisement.id,
         title: advertisement.title,

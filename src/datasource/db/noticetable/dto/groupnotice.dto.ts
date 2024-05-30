@@ -1,6 +1,6 @@
 import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
 
-export class GroupadvertisementDto {
+export class GroupnoticeDto {
   @IsNotEmpty()
   groupId: number;
 
@@ -8,7 +8,7 @@ export class GroupadvertisementDto {
   groupName: string;
 
   @IsNotEmpty()
-  advertisementId: number;
+  noticeId: number;
 
   @IsDate()
   createdAt: Date;
@@ -23,7 +23,7 @@ export class GroupadvertisementDto {
   constructor(json: any) {
     this.groupId = json.group_id;
     this.groupName = json.name;
-    this.advertisementId = json.advertisement_id;
+    this.noticeId = json.notice_id;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;

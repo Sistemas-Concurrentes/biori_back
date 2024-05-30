@@ -1,10 +1,12 @@
-import { Group } from '../../../../datasource/db/advertisementtable/model/groupadvertisement.model';
+import {
+  Group,
+} from '../../../../datasource/db/noticetable/model/groupnotice.model';
 import { TagModel } from '../../../../datasource/db/tagtable/model/tag.model';
 import {
   GroupModel,
 } from '../../../../datasource/db/grouptable/model/group.model';
 
-export interface Advertisement{
+export interface Notices {
   id: number;
   title: string;
   description: string;
@@ -56,7 +58,7 @@ export interface EventGroup {
 }
 
 export interface ConsultResult{
-  advertisements: Advertisement[],
+  notices: Notices[],
   reports: Report[],
   events: Event[],
   eventsGroup: EventGroup[]
