@@ -10,7 +10,7 @@ export class EventTagTable {
   }
 
   async getAll(): Promise<EventTagModel> {
-    const query = 'SELECT et.*, t.tag_title FROM biori.event_tag et ' +
+    const query = 'SELECT et.*, t.tag_title FROM event_tag et ' +
       'INNER JOIN tag t on et.tag_id = t.id;';
     const eventDatesJson = await this.dbConnection.runQuery(query);
 
