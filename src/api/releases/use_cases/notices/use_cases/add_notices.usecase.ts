@@ -22,11 +22,8 @@ export class AddNoticesUsecase {
   async run(
     addNoticesDto: AddNoticesDto,
     userId: number): Promise<AddNoticeResult> {
-    const teacherId: number = await this.teacherTable.getUserIdByTeacherId(
-        userId);
-    const isTeacherOrDelegate = teacherId == 0;
-
-    if (isTeacherOrDelegate) {
+    const isTeacher: boolean = await this.teacherTable.isUserATeacher(userId);
+    if (!isTeacher) {
       throw new HttpException('Teacher not found', HttpStatus.FORBIDDEN);
     }
 

@@ -7,10 +7,10 @@ export class TeacherTable {
   constructor(private dbConnection: DbConnection) {
   }
 
-  async getUserIdByTeacherId(teacherId: number): Promise<number> {
-    const query = 'SELECT id FROM teacher WHERE user_id = ?';
+  async isUserATeacher(teacherId: number): Promise<boolean> {
+    const query = 'SELECT id FROM teacher';
     const id = await this.dbConnection.runQuery(query, [teacherId]);
 
-    return id.length > 0 ? id[0].id : 0;
+    return id.length > 0;
   }
 }
