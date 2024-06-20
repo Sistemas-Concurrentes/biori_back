@@ -37,6 +37,8 @@ export interface Event{
   dates: Date[];
   location: string;
   likes: number;
+  isLiked: boolean;
+  isRegistered: boolean;
   tags: TagModel[];
   dateEndInscription: Date;
   updatedAt: Date;
@@ -52,6 +54,8 @@ export interface EventGroup {
   dates: Date[];
   location: string;
   likes: number;
+  isLiked: boolean;
+  isRegistered: boolean;
   groups: GroupModel[];
   dateEndInscription: Date;
   updatedAt: Date;

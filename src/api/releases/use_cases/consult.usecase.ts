@@ -27,8 +27,8 @@ export class ConsultUsecase {
               private reportTable: ReportTable,
               private eventTable: EventTable) {}
 
-  async run(): Promise<ConsultResult> {
-    this.allEvents = await this.eventTable.getAll();
+  async run(user_id: number): Promise<ConsultResult> {
+    this.allEvents = await this.eventTable.getAll(user_id);
 
     const allNotices = await this.getNotices();
     const allReports= await this.getReports()
@@ -90,6 +90,8 @@ export class ConsultUsecase {
           dates: event.dates,
           location: event.location,
           likes: event.likes,
+          isLiked: event.isLiked,
+          isRegistered: event.isRegistered,
           tags: event.tags,
           dateEndInscription: event.dateEndInscription,
           updatedAt: event.updatedAt,
@@ -105,6 +107,8 @@ export class ConsultUsecase {
           dates: event.dates,
           location: event.location,
           likes: event.likes,
+          isLiked: event.isLiked,
+          isRegistered: event.isRegistered,
           groups: event.groups,
           dateEndInscription: event.dateEndInscription,
           updatedAt: event.updatedAt,

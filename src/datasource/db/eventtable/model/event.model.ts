@@ -33,6 +33,12 @@ export class EventModel {
   @IsNotEmpty()
   likes: number;
 
+  @IsNotEmpty()
+  isLiked: boolean;
+
+  @IsNotEmpty()
+  isRegistered: boolean;
+
   @IsDate()
   createdAt: Date;
 
@@ -58,6 +64,8 @@ export class EventModel {
     this.groups = groups;
     this.location = json.location;
     this.likes = Number(json.likes_count);
+    this.isLiked = json.user_followed;
+    this.isRegistered = json.user_registered;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;

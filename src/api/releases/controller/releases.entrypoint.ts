@@ -3,7 +3,7 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
-  Get,
+  Get, Request,
 } from '@nestjs/common';
 import { AuthGuard } from '../../auth/guards/auth.guard';
 import { ConsultUsecase } from '../use_cases/consult.usecase';
@@ -17,8 +17,8 @@ export class ReleasesEntrypoint {
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
   @Get('getAll')
-  async getAll (){
-    return this.consultUseCase.run();
+  async getAll(@Request() request: any) {
+    return this.consultUseCase.run(request.id);
   }
 
 }
