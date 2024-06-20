@@ -10,9 +10,11 @@ export class GroupNoticeTable {
   }
 
   async getAll(): Promise<GroupnoticeModel> {
-    const query = 'SELECT ga.*, g.name from group_notices ga INNER JOIN ' +
-      '`group` g ON ga.group_id = g.id ORDER BY ga.notice_id';
-    const groupAdvsJson = await this.dbConnection.runQuery(query);
+    const query = 'SELECT ga.*, CONCAT(g.name, " ", s.name) as name from group_notices ga ' +
+      'INNER JOIN `group` g ON ga.group_id = g.id ' +
+      'INNER JOIN `subject` s on g.subject = s.id ' +
+      'ORDER BY ga.notice_id ';
+    const groupNoticesJson = await this.dbConnection.runQuery(query);
 
     const groupNoticesDtos = groupNoticesJson.map((groupNoticeJson) => {
       return new GroupnoticeDto(groupNoticeJson);
