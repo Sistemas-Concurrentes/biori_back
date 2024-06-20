@@ -37,7 +37,7 @@ import {
                 module: EventsControllerModule,
               },
               {
-                path: 'advertisement',
+                path: 'notice',
                 module: NoticesControllerModule,
               },
               {

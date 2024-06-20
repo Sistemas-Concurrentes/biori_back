@@ -14,11 +14,11 @@ export class GroupNoticeTable {
       '`group` g ON ga.group_id = g.id ORDER BY ga.notice_id';
     const groupAdvsJson = await this.dbConnection.runQuery(query);
 
-    const groupAdvsDtos =  groupAdvsJson.map((groupAdvsJson) => {
-      return new GroupnoticeDto(groupAdvsJson);
+    const groupNoticesDtos = groupNoticesJson.map((groupNoticeJson) => {
+      return new GroupnoticeDto(groupNoticeJson);
     });
 
-    return new GroupnoticeModel(groupAdvsDtos);
+    return new GroupnoticeModel(groupNoticesDtos);
   }
 
   async asignGroupsToNotice(noticeId: number, groups: number[]) {
