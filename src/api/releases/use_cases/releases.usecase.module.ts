@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AdvertisementtableModule } from '../../../datasource/db/advertisementtable/advertisementtable.module';
+import {
+  NoticetableModule,
+} from '../../../datasource/db/noticetable/noticetable.module';
 import { ConsultUsecase } from './consult.usecase';
 import { ReportModule } from '../../../datasource/db/reporttable/reporttable.module';
 import { EventtableModule } from '../../../datasource/db/eventtable/eventtable.module';
@@ -8,13 +10,13 @@ import {
   UsertableModule,
 } from '../../../datasource/db/usertable/usertable.module';
 import {
-  AddAdvertisementUsecase,
-} from './advertisements/use_cases/add_advertisement.usecase';
+  AddNoticesUsecase,
+} from './notices/use_cases/add_notices.usecase';
 import {AddReportUsecase} from './reports/use_cases/add_report.usecase';
 
 @Module({
   imports: [
-    AdvertisementtableModule,
+    NoticetableModule,
     ReportModule,
     EventtableModule,
     UsertableModule],
@@ -22,12 +24,12 @@ import {AddReportUsecase} from './reports/use_cases/add_report.usecase';
   providers: [
     ConsultUsecase,
     AddEventUsecase,
-    AddAdvertisementUsecase,
+    AddNoticesUsecase,
     AddReportUsecase],
   exports: [
     ConsultUsecase,
     AddEventUsecase,
-    AddAdvertisementUsecase,
+    AddNoticesUsecase,
     AddReportUsecase],
 })
 export class ReleasesUsecaseModule {}

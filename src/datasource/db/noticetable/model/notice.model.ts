@@ -1,7 +1,7 @@
 import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
-import { Group } from './groupadvertisement.model';
+import { Group } from './groupnotice.model';
 
-export class AdvertisementModel {
+export class NoticeModel {
   @IsNotEmpty()
   id: number;
 

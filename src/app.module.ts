@@ -9,8 +9,8 @@ import {
   EventsControllerModule,
 } from './api/releases/use_cases/events/controller/events.module';
 import {
-  AdvertisementsControllerModule,
-} from './api/releases/use_cases/advertisements/controller/advertisements.module';
+  NoticesControllerModule,
+} from './api/releases/use_cases/notices/controller/notices.module';
 import {
   ReportControllerModule,
 } from './api/releases/use_cases/reports/controller/reports.module';
@@ -20,7 +20,7 @@ import {
     DbModule, AuthControllerModule,
     ReleasesControllerModule,
     EventsControllerModule,
-    AdvertisementsControllerModule,
+    NoticesControllerModule,
     ReportControllerModule,
     RouterModule.register(
         [
@@ -37,8 +37,8 @@ import {
                 module: EventsControllerModule,
               },
               {
-                path: 'advertisement',
-                module: AdvertisementsControllerModule,
+                path: 'notice',
+                module: NoticesControllerModule,
               },
               {
                 path: 'report',

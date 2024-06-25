@@ -6,5 +6,14 @@ export class AddReportDto {
 
   @IsNotEmpty()
   descripcion: string;
+
+  @IsNotEmpty()
+  scholarYear: number;
+
+  @IsNotEmpty()
+  toTeachers: boolean;
+
+  @IsNotEmpty()
+  courses: number[];
 }
 

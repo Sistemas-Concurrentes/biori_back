@@ -6,10 +6,10 @@ export class LikesTable {
   constructor(private dbConnection: DbConnection) {
   }
 
-  async hasBeenLiked(eventId: number, studentId: number): Promise<boolean> {
+  async hasBeenLiked(eventId: number, userId: number): Promise<boolean> {
     try {
-      const query = 'SELECT * FROM likes_student_event WHERE event_id = ? AND student_id = ?';
-      const values = [eventId, studentId];
+      const query = 'SELECT * FROM likes_user_event WHERE event_id = ? AND user_id = ?';
+      const values = [eventId, userId];
       const likeStudentEvent = await this.dbConnection.runQuery(query, values);
 
       return likeStudentEvent.length > 0;
@@ -20,10 +20,10 @@ export class LikesTable {
   }
 
   async addLike(
-      eventId: number, studentId: number, isFollowed: boolean): Promise<void> {
+    eventId: number, userId: number, isFollowed: boolean): Promise<void> {
     try {
-      const query = 'INSERT INTO likes_student_event (event_id, student_id, is_followed) VALUES (?, ?, ?)';
-      const values = [eventId, studentId, isFollowed];
+      const query = 'INSERT INTO likes_user_event (event_id, user_id, is_followed) VALUES (?, ?, ?)';
+      const values = [eventId, userId, isFollowed];
       await this.dbConnection.runQuery(query, values);
     } catch (e) {
       console.log(e);
@@ -32,10 +32,10 @@ export class LikesTable {
   }
 
   async updateLike(
-      eventId: number, studentId: number, isFollowed: boolean): Promise<void> {
+    eventId: number, user_id: number, isFollowed: boolean): Promise<void> {
     try {
-      const query = 'UPDATE likes_student_event SET is_followed = ? WHERE event_id = ? AND student_id = ?';
-      const values = [isFollowed, eventId, studentId];
+      const query = 'UPDATE likes_user_event SET is_followed = ? WHERE event_id = ? AND user_id = ?';
+      const values = [isFollowed, eventId, user_id];
       await this.dbConnection.runQuery(query, values);
     } catch (e) {
       console.log(e);

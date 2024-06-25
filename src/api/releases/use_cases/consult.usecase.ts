@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import {
-  Advertisement,
+  Notices,
   ConsultResult,
   Report,
   Event,
   EventGroup,
 } from './dto/consult.result';
-import { Advertisementtable } from '../../../datasource/db/advertisementtable/advertisementtable.usecase';
+import {
+  NoticeTable,
+} from '../../../datasource/db/noticetable/noticetable.usecase';
 import { ReportTable } from '../../../datasource/db/reporttable/reporttable.usecase';
 import { EventTable } from '../../../datasource/db/eventtable/eventtable.usecase';
 import {
@@ -20,19 +22,20 @@ export class ConsultUsecase {
   allGeneralEvents: Event[] = [];
   allGroupEvents: EventGroup[] = [];
 
-  constructor(private advertisementTable: Advertisementtable,
+  constructor(
+    private noticeTable: NoticeTable,
               private reportTable: ReportTable,
               private eventTable: EventTable) {}
 
-  async run(): Promise<ConsultResult> {
-    this.allEvents = await this.eventTable.getAll();
+  async run(user_id: number): Promise<ConsultResult> {
+    this.allEvents = await this.eventTable.getAll(user_id);
 
-    const allAdvertisements = await this.getAdvertisents();
+    const allNotices = await this.getNotices();
     const allReports= await this.getReports()
     await this.getEvents();
 
     const result: ConsultResult = {
-      advertisements: allAdvertisements,
+      notices: allNotices,
       reports: allReports,
       events: this.allGeneralEvents,
       eventsGroup: this.allGroupEvents,
@@ -43,9 +46,9 @@ export class ConsultUsecase {
     return result;
   }
 
-  async getAdvertisents(): Promise<Advertisement[]> {
-    const allAdvertisements= await this.advertisementTable.getAll();
-    return allAdvertisements.map((advertisement) => {
+  async getNotices(): Promise<Notices[]> {
+    const allNotices = await this.noticeTable.getAll();
+    return allNotices.map((advertisement) => {
       return {
         id: advertisement.id,
         title: advertisement.title,
@@ -65,8 +68,10 @@ export class ConsultUsecase {
         id: report.id,
         title: report.title,
         description: report.description,
-        teacherName: report.teacherName,
-        teacherId: report.teacherId,
+        userName: report.userName,
+        userId: report.userId,
+        courses: report.courses,
+        toTeachers: report.to_teachers,
         updatedAt: report.updatedAt
       }
     });
@@ -85,6 +90,8 @@ export class ConsultUsecase {
           dates: event.dates,
           location: event.location,
           likes: event.likes,
+          isLiked: event.isLiked,
+          isRegistered: event.isRegistered,
           tags: event.tags,
           dateEndInscription: event.dateEndInscription,
           updatedAt: event.updatedAt,
@@ -100,6 +107,8 @@ export class ConsultUsecase {
           dates: event.dates,
           location: event.location,
           likes: event.likes,
+          isLiked: event.isLiked,
+          isRegistered: event.isRegistered,
           groups: event.groups,
           dateEndInscription: event.dateEndInscription,
           updatedAt: event.updatedAt,

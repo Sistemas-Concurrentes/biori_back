@@ -1,14 +1,11 @@
 import { IsBoolean, IsDate, IsNotEmpty } from 'class-validator';
 
-export class GroupadvertisementDto {
+export class ReportCoursesDto {
   @IsNotEmpty()
-  groupId: number;
+  courseId: number;
 
   @IsNotEmpty()
-  groupName: string;
-
-  @IsNotEmpty()
-  advertisementId: number;
+  reportId: number;
 
   @IsDate()
   createdAt: Date;
@@ -19,11 +16,9 @@ export class GroupadvertisementDto {
   @IsBoolean()
   isDeleted: boolean;
 
-
   constructor(json: any) {
-    this.groupId = json.group_id;
-    this.groupName = json.name;
-    this.advertisementId = json.advertisement_id;
+    this.courseId = json.course_id;
+    this.reportId = json.report_id;
     this.createdAt = json.created;
     this.updatedAt = json.last_update;
     this.isDeleted = json.is_deleted;

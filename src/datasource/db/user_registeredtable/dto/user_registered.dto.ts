@@ -1,8 +1,8 @@
 import {IsNotEmpty} from 'class-validator';
 
-export class Student_registeredDto {
+export class User_registeredDto {
   @IsNotEmpty()
-  studentId: number;
+  userId: number;
 
   @IsNotEmpty()
   eventId: number;

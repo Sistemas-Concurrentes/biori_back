@@ -21,9 +21,8 @@ export class AddEventUsecase {
   async run(
     addEventDto: AddEventDto, userId: number,
     eventType: EventEnum): Promise<AddEventResult> {
-    const teacherId: number = await this.teacherTable.getUserIdByTeacherId(
-        userId);
-    if (teacherId == 0) {
+    const isTeacher: boolean = await this.teacherTable.isUserATeacher(userId);
+    if (!isTeacher) {
       throw new HttpException('Teacher not found', HttpStatus.FORBIDDEN);
     }
 
@@ -31,7 +30,7 @@ export class AddEventUsecase {
       titulo: addEventDto.titulo,
       categoria: addEventDto.categoria,
       descripcion: addEventDto.descripcion,
-      teacherId: teacherId,
+      teacherId: userId,
       localizacion: addEventDto.localizacion,
       fechaFinInscripcion: addEventDto.fechaFinInscripcion,
       fechas: addEventDto.fechas.map(fecha => new Date(fecha)),
