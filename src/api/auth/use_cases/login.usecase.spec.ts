@@ -23,6 +23,8 @@ describe('LoginUsecase', () => {
     password: 'hashedPassword',
     phone_number: 'phone',
     register_code: 1,
+    user_type: 'student',
+    rol: 'administrator',
     createdAt: new Date(),
     updatedAt: new Date(),
     deletedAt: new Date(),
@@ -87,7 +89,8 @@ describe('LoginUsecase', () => {
     async () => {
       const myJwtSpyMock = jest.spyOn(mockJwt, 'getAccessToken');
       await useCase.run('user', 'pass');
-      expect(myJwtSpyMock).toHaveBeenCalledWith(1, 'username', 'name');
+      expect(myJwtSpyMock).
+        toHaveBeenCalledWith(1, 'username', 'name', 'student', 'administrator');
     });
 
   it('should be defined', () => {
