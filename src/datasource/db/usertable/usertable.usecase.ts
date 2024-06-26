@@ -13,7 +13,11 @@ export class UserTable {
   }
 
   async getUserByEmail(user_name: string): Promise<UsertableModel> {
-    const query = 'SELECT * FROM user WHERE user_name = ? ';
+    const query = 'SELECT u.*, s.id as studentId, t.id as teacherId, ur.role as rol FROM user u ' +
+      'left join student s on s.id=u.id ' +
+      'left join teacher t on t.id=u.id ' +
+      'left join user_role ur on u.id = ur.user_id ' +
+      'WHERE user_name = ?';
     const user = await this.dbConnection.runQuery(query, [user_name]);
 
     return new UsertableModel(user[0]);

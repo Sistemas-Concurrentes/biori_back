@@ -6,8 +6,11 @@ import { JwtModel, jwtModelFromJson } from './model/jwt.model';
 export class MyJwtService {
 
   constructor(private jwtService: JwtService) {}
-  getAccessToken(id: number, username: string, name: string): string {
-    const jwtModel = new JwtModel(id, username, name);
+
+  getAccessToken(
+    id: number, username: string, name: string, user_type: string,
+    rol: string): string {
+    const jwtModel = new JwtModel(id, username, name, user_type, rol);
     const payload = jwtModel.toJson();
     return this.jwtService.sign(payload);
   }
