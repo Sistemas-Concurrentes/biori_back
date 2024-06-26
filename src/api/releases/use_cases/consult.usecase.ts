@@ -49,14 +49,18 @@ export class ConsultUsecase {
   async getNotices(): Promise<Notices[]> {
     const allNotices = await this.noticeTable.getAll();
     return allNotices.map((advertisement) => {
-      return {
-        id: advertisement.id,
-        title: advertisement.title,
-        description: advertisement.description,
-        groups: advertisement.groups,
-        userName: advertisement.userName,
-        userId: advertisement.userId,
-        updatedAt: advertisement.updatedAt
+      try {
+        return {
+          id: advertisement.id,
+          title: advertisement.title,
+          description: advertisement.description,
+          groups: advertisement.groups,
+          userName: advertisement.userName,
+          userId: advertisement.userId,
+          updatedAt: advertisement.updatedAt,
+        };
+      } catch (e) {
+        console.log(e);
       }
     });
   }
@@ -64,15 +68,19 @@ export class ConsultUsecase {
   async getReports(): Promise<Report[]> {
     const allReports= await this.reportTable.getAll();
     return allReports.map((report) => {
-      return {
-        id: report.id,
-        title: report.title,
-        description: report.description,
-        userName: report.userName,
-        userId: report.userId,
-        courses: report.courses,
-        toTeachers: report.to_teachers,
-        updatedAt: report.updatedAt
+      try {
+        return {
+          id: report.id,
+          title: report.title,
+          description: report.description,
+          userName: report.userName,
+          userId: report.userId,
+          courses: report.courses,
+          toTeachers: report.to_teachers,
+          updatedAt: report.updatedAt,
+        };
+      } catch (e) {
+        console.log(e);
       }
     });
   }
